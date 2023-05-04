@@ -31,7 +31,7 @@ class BigwaveRoboticsBase extends BaseModule {
 
 
         /***************************************************************************************
-            로봇에 전달하는 명령
+            로봇에 전달하는 데이터
          ***************************************************************************************/
 
         /*
@@ -48,105 +48,6 @@ class BigwaveRoboticsBase extends BaseModule {
             // 전송 대상
             TARGET: 'target',
 
-            // BATTLE_IR_MESSAGE
-            BATTLE_IR_MESSAGE: 'battle_ir_message',
-
-            // Light Manual
-            LIGHT_MANUAL_FLAGS: 'light_manual_flags',
-            LIGHT_MANUAL_BRIGHTNESS: 'light_manual_brightness',
-
-            // Light Mode
-            LIGHT_MODE_MODE: 'light_mode_mode',
-            LIGHT_MODE_INTERVAL: 'light_mode_interval',
-
-            // Light Event
-            LIGHT_EVENT_EVENT: 'light_event_event',
-            LIGHT_EVENT_INTERVAL: 'light_event_interval',
-            LIGHT_EVENT_REPEAT: 'light_event_repeat',
-
-            // Light Color
-            LIGHT_COLOR_R: 'light_color_r',
-            LIGHT_COLOR_G: 'light_color_g',
-            LIGHT_COLOR_B: 'light_color_b',
-
-            // 화면 전체 지우기
-            DISPLAY_CLEAR_ALL_PIXEL: 'display_clear_all_pixel',
-
-            // 선택 영역 지우기
-            DISPLAY_CLEAR_X: 'display_clear_x',
-            DISPLAY_CLEAR_Y: 'display_clear_y',
-            DISPLAY_CLEAR_WIDTH: 'display_clear_width',
-            DISPLAY_CLEAR_HEIGHT: 'display_clear_height',
-            DISPLAY_CLEAR_PIXEL: 'display_clear_pixel',
-
-            // 선택 영역 반전
-            DISPLAY_INVERT_X: 'display_invert_x',
-            DISPLAY_INVERT_Y: 'display_invert_y',
-            DISPLAY_INVERT_WIDTH: 'display_invert_width',
-            DISPLAY_INVERT_HEIGHT: 'display_invert_height',
-
-            // 화면에 점 찍기
-            DISPLAY_DRAW_POINT_X: 'display_draw_point_x',
-            DISPLAY_DRAW_POINT_Y: 'display_draw_point_y',
-            DISPLAY_DRAW_POINT_PIXEL: 'display_draw_point_pixel',
-
-            // 화면에 선 그리기
-            DISPLAY_DRAW_LINE_X1: 'display_draw_line_x1',
-            DISPLAY_DRAW_LINE_Y1: 'display_draw_line_y1',
-            DISPLAY_DRAW_LINE_X2: 'display_draw_line_x2',
-            DISPLAY_DRAW_LINE_Y2: 'display_draw_line_y2',
-            DISPLAY_DRAW_LINE_PIXEL: 'display_draw_line_pixel',
-            DISPLAY_DRAW_LINE_LINE: 'display_draw_line_line',
-
-            // 화면에 사각형 그리기
-            DISPLAY_DRAW_RECT_X: 'display_draw_rect_x',
-            DISPLAY_DRAW_RECT_Y: 'display_draw_rect_y',
-            DISPLAY_DRAW_RECT_WIDTH: 'display_draw_rect_width',
-            DISPLAY_DRAW_RECT_HEIGHT: 'display_draw_rect_height',
-            DISPLAY_DRAW_RECT_PIXEL: 'display_draw_rect_pixel',
-            DISPLAY_DRAW_RECT_FLAGFILL: 'display_draw_rect_flagfill',
-            DISPLAY_DRAW_RECT_LINE: 'display_draw_rect_line',
-
-            // 화면에 원 그리기
-            DISPLAY_DRAW_CIRCLE_X: 'display_draw_circle_x',
-            DISPLAY_DRAW_CIRCLE_Y: 'display_draw_circle_y',
-            DISPLAY_DRAW_CIRCLE_RADIUS: 'display_draw_circle_radius',
-            DISPLAY_DRAW_CIRCLE_PIXEL: 'display_draw_circle_pixel',
-            DISPLAY_DRAW_CIRCLE_FLAGFILL: 'display_draw_circle_flagfill',
-
-            // 화면에 문자열 쓰기
-            DISPLAY_DRAW_STRING_X: 'display_draw_string_x',
-            DISPLAY_DRAW_STRING_Y: 'display_draw_string_y',
-            DISPLAY_DRAW_STRING_FONT: 'display_draw_string_font',
-            DISPLAY_DRAW_STRING_PIXEL: 'display_draw_string_pixel',
-            DISPLAY_DRAW_STRING_STRING: 'display_draw_string_string',
-
-            // 화면에 문자열 정렬하여 그리기
-            DISPLAY_DRAW_STRING_ALIGN_X_START: 'display_draw_string_align_x_start',
-            DISPLAY_DRAW_STRING_ALIGN_X_END: 'display_draw_string_align_x_end',
-            DISPLAY_DRAW_STRING_ALIGN_Y: 'display_draw_string_align_y',
-            DISPLAY_DRAW_STRING_ALIGN_ALIGN: 'display_draw_string_align_align',
-            DISPLAY_DRAW_STRING_ALIGN_FONT: 'display_draw_string_align_font',
-            DISPLAY_DRAW_STRING_ALIGN_PIXEL: 'display_draw_string_align_pixel',
-            DISPLAY_DRAW_STRING_ALIGN_STRING: 'display_draw_string_align_string',
-
-            // Buzzer
-            BUZZER_MODE: 'buzzer_mode',
-            BUZZER_VALUE: 'buzzer_value',
-            BUZZER_TIME: 'buzzer_time',
-
-            // Vibrator
-            VIBRATOR_MODE: 'vibrator_mode',
-            VIBRATOR_ON: 'vibrator_on',
-            VIBRATOR_OFF: 'vibrator_off',
-            VIBRATOR_TOTAL: 'vibrator_total',
-
-            // Control::Quad8
-            CONTROL_QUAD8_ROLL: 'control_quad8_roll',
-            CONTROL_QUAD8_PITCH: 'control_quad8_pitch',
-            CONTROL_QUAD8_YAW: 'control_quad8_yaw',
-            CONTROL_QUAD8_THROTTLE: 'control_quad8_throttle',
-
             // Control::Position
             CONTROL_POSITION_X: 'control_position_x',
             CONTROL_POSITION_Y: 'control_position_y',
@@ -158,17 +59,6 @@ class BigwaveRoboticsBase extends BaseModule {
             // Command
             COMMAND_COMMAND: 'command_command',
             COMMAND_OPTION: 'command_option',
-
-            // Trim
-            TRIM_ROLL: 'trim_roll',
-            TRIM_PITCH: 'trim_pitch',
-            TRIM_YAW: 'trim_yaw',
-            TRIM_THROTTLE: 'trim_throttle',
-
-            // Motor
-            MOTORSINGLE_TARGET: 'motorsingle_target',
-            MOTORSINGLE_ROTATION: 'motorsingle_rotation',   // direction -> rotation
-            MOTORSINGLE_VALUE: 'motorsingle_value',
         };
 
 
@@ -369,8 +259,10 @@ class BigwaveRoboticsBase extends BaseModule {
         this.isConnect = true;
         this.serialport = serialport;
 
+        /*
         //this.log(`BASE - requestInitialData(0x${this.targetDevice.toString(16).toUpperCase()})`);
         return this.reservePing(this.targetDevice);
+        // */
     }
 
 
@@ -379,8 +271,11 @@ class BigwaveRoboticsBase extends BaseModule {
         연결 후 초기에 수신받아서 정상연결인지를 확인해야하는 경우 사용합니다.
      */
     checkInitialData(data, config) {
+        return true;
+        /*
         this.log('BASE - checkInitialData()');
         return this.checkInitialAck(data, config);
+        // */
     }
 
 
@@ -394,9 +289,8 @@ class BigwaveRoboticsBase extends BaseModule {
 
 
     /*
-        하드웨어에 전달할 데이터
+        하드웨어에 데이터 전송
 
-        하드웨어 기기에 전달할 데이터를 반환합니다.
         slave 모드인 경우 duration 속성 간격으로 지속적으로 기기에 요청을 보냅니다.
     */
     requestLocalData() {
@@ -410,7 +304,7 @@ class BigwaveRoboticsBase extends BaseModule {
     */
     handleLocalData(data) {
         //this.log("BASE - handleLocalData()");
-        this.receiverForDevice(data);
+        this.receiveFromDevice(data);
     }
 
 
@@ -428,7 +322,7 @@ class BigwaveRoboticsBase extends BaseModule {
     */
     handleRemoteData(handler) {
         //this.log("BASE - handleRemoteData()");
-        this.handlerForEntry(handler);
+        this.receiveFromEntry(handler);
     }
 
 
@@ -468,78 +362,47 @@ class BigwaveRoboticsBase extends BaseModule {
         // -- JSON Objects ----------------------------------------------------------------
         // Device -> Entry
 
+        /*
         // Ack
         this.clearAck();
 
-        // State
-        this.clearState();
-
-        // Altitude
-        this.clearAltitude();
-
-        // Position
-        this.clearPosition();
-
-        // Joystick
-        this.clearJoystick();
-
-        // Button
-        this.clearButton();
-
-        // Motion
-        this.clearMotion();
-
-        // Trim
-        this.clearTrim();
-
-        // Range
-        this.clearRange();
-
-        // BattleIrMessage
-        this.clearBattleIrMessage();
-
-        // Range
-        this.clearCardColor();
-
-        // InformationAssembledForEntry
-        this.clearInformationAssembledForEntry();
-
         // 변수 초기화
         this.clearVariable();
+        // */
     }
 
     clearVariable() {
         // -- Control -----------------------------------------------------------------
-        this.controlWheel = 0;        //
-        this.controlAccel = 0;        //
-        this.controlRoll = 0;        //
-        this.controlPitch = 0;        //
+        this.controlWheel = 0;      //
+        this.controlAccel = 0;      //
+        this.controlRoll = 0;       //
+        this.controlPitch = 0;      //
         this.controlYaw = 0;        //
-        this.controlThrottle = 0;        //
+        this.controlThrottle = 0;   //
 
         // -- Hardware ----------------------------------------------------------------
-        this.bufferReceive = [];       // 데이터 수신 버퍼
-        this.bufferTransfer = [];       // 데이터 송신 버퍼
+        this.bufferReceive = [];    // 데이터 수신 버퍼
+        this.bufferTransfer = [];   // 데이터 송신 버퍼
 
-        this.dataType = 0;        // 수신 받은 데이터의 타입
+        this.dataType = 0;          // 수신 받은 데이터의 타입
         this.dataLength = 0;        // 수신 받은 데이터의 길이
-        this.from = 0;        // 송신 장치 타입
-        this.to = 0;        // 수신 장치 타입
-        this.indexSession = 0;        // 수신 받은 데이터의 세션
-        this.indexReceiver = 0;        // 수신 받은 데이터의 세션 내 위치
-        this.dataBlock = [];       // 수신 받은 데이터 블럭
-        this.crc16Calculated = 0;        // CRC16 계산 결과
-        this.crc16Received = 0;        // CRC16 수신값
-        this.crc16Transfered = 0;        // 전송한 데이터의 crc16
+        this.from = 0;              // 송신 장치 타입
+        this.to = 0;                // 수신 장치 타입
+        this.indexSession = 0;      // 수신 받은 데이터의 세션
+        this.indexReceiver = 0;     // 수신 받은 데이터의 세션 내 위치
+        this.dataBlock = [];        // 수신 받은 데이터 블럭
+        this.crc16Calculated = 0;   // CRC16 계산 결과
+        this.crc16Received = 0;     // CRC16 수신값
+        this.crc16Transfered = 0;   // 전송한 데이터의 crc16
 
-        this.maxTransferRepeat = 3;        // 최대 반복 전송 횟수
-        this.countTransferRepeat = 0;        // 반복 전송 횟수
-        this.dataTypeLastTransfered = 0;        // 마지막으로 전송한 데이터의 타입
+        this.maxTransferRepeat = 3;         // 최대 반복 전송 횟수
+        this.countTransferRepeat = 0;       // 반복 전송 횟수
+        this.dataTypeLastTransfered = 0;    // 마지막으로 전송한 데이터의 타입
 
-        this.timeReceive = 0;        // 데이터를 전송 받은 시각
-        this.timeTransfer = 0;        // 예약 데이터를 전송한 시각
-        this.timeTransferNext = 0;        // 전송 가능한 다음 시간
-        this.timeTransferInterval = 20;       // 최소 전송 시간 간격
+        this.timeReceive = 0;           // 데이터를 전송 받은 시각
+        this.timeTransfer = 0;          // 예약 데이터를 전송한 시각
+        this.timeTransferNext = 0;      // 전송 가능한 다음 시간
+        this.timeTransferInterval = 20; // 최소 전송 시간 간격
 
         this.countReqeustDevice = 0;        // 장치에 데이터를 요청한 횟수 카운트
     }
@@ -642,310 +505,6 @@ class BigwaveRoboticsBase extends BaseModule {
         return false;
     }
 
-
-    clearPosition() {
-        this.position._updated = false;
-        this.position.position_x = 0;
-        this.position.position_y = 0;
-        this.position.position_z = 0;
-    }
-
-    updatePosition() {
-        //this.log(`BASE - updatePosition() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 12) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.position._updated = true;
-            this.position.position_x = view.getFloat32(0, true);
-            this.position.position_y = view.getFloat32(4, true);
-            this.position.position_z = view.getFloat32(8, true);
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-    clearButton() {
-        this.button._updated = false;
-        this.button.button_button = 0;
-        this.button.button_event = 0;
-    }
-
-    updateButton() {
-        //this.log(`BASE - updateButton() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 3) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.button._updated = true;
-            this.button.button_button = view.getUint16(0, true);
-            this.button.button_event = view.getUint8(2);
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-    clearJoystick() {
-        this.joystick._updated = false;
-        this.joystick.joystick_left_x = 0;
-        this.joystick.joystick_left_y = 0;
-        this.joystick.joystick_left_direction = 0;
-        this.joystick.joystick_left_event = 0;
-        this.joystick.joystick_right_x = 0;
-        this.joystick.joystick_right_y = 0;
-        this.joystick.joystick_right_direction = 0;
-        this.joystick.joystick_right_event = 0;
-    }
-
-    updateJoystick() {
-        //this.log(`BASE - updateJoystick() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 8) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.joystick._updated = true;
-            this.joystick.joystick_left_x = view.getInt8(0);
-            this.joystick.joystick_left_y = view.getInt8(1);
-            this.joystick.joystick_left_direction = view.getUint8(2);
-            this.joystick.joystick_left_event = view.getUint8(3);
-            this.joystick.joystick_right_x = view.getInt8(4);
-            this.joystick.joystick_right_y = view.getInt8(5);
-            this.joystick.joystick_right_direction = view.getUint8(6);
-            this.joystick.joystick_right_event = view.getUint8(7);
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-    clearMotion() {
-        this.motion._updated = false;
-        this.motion.motion_accelX = 0;
-        this.motion.motion_accelY = 0;
-        this.motion.motion_accelZ = 0;
-        this.motion.motion_gyroRoll = 0;
-        this.motion.motion_gyroPitch = 0;
-        this.motion.motion_gyroYaw = 0;
-        this.motion.motion_angleRoll = 0;
-        this.motion.motion_anglePitch = 0;
-        this.motion.motion_angleYaw = 0;
-    }
-
-
-    updateMotion() {
-        this.log(`BASE - updateMotion() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 18) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            //*
-            this.motion._updated = true;
-            this.motion.motion_accelX = view.getInt16(0, true);
-            this.motion.motion_accelY = view.getInt16(2, true);
-            this.motion.motion_accelZ = view.getInt16(4, true);
-            this.motion.motion_gyroRoll = view.getInt16(6, true);
-            this.motion.motion_gyroPitch = view.getInt16(8, true);
-            this.motion.motion_gyroYaw = view.getInt16(10, true);
-            this.motion.motion_angleRoll = view.getInt16(12, true);
-            this.motion.motion_anglePitch = view.getInt16(14, true);
-            this.motion.motion_angleYaw = view.getInt16(16, true);
-            // */
-
-            /*
-            const kAccel  = (9.8f / 2048);          // 1g (중력가속도) = 9.8 m/s^2 로 만들기 위한 변환 상수
-            const kGyro   = (2000.0f / 32767);      // 각 속도 (deg/s) 를 만들기 위한 변환 상수
-
-            this.motion._updated            = true;
-            this.motion.motion_accelX       = (view.getInt16(0, true) * kAccel).toFixed(2);
-            this.motion.motion_accelY       = (view.getInt16(2, true) * kAccel).toFixed(2);
-            this.motion.motion_accelZ       = (view.getInt16(4, true) * kAccel).toFixed(2);
-            this.motion.motion_gyroRoll     = (view.getInt16(6, true) * kGyro).toFixed(2);
-            this.motion.motion_gyroPitch    = (view.getInt16(8, true) * kGyro).toFixed(2);
-            this.motion.motion_gyroYaw      = (view.getInt16(10, true) * kGyro).toFixed(2);
-            this.motion.motion_angleRoll    = view.getInt16(12, true);
-            this.motion.motion_anglePitch   = view.getInt16(14, true);
-            this.motion.motion_angleYaw     = view.getInt16(16, true);
-            // */
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-    clearTrim() {
-        this.trim._updated = false;
-        this.trim.trim_roll = 0;
-        this.trim.trim_pitch = 0;
-        this.trim.trim_yaw = 0;
-        this.trim.trim_throttle = 0;
-    }
-
-
-    updateTrim() {
-        this.log(`BASE - updateTrim() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 8) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.trim._updated = true;
-            this.trim.trim_roll = view.getInt16(0, true);
-            this.trim.trim_pitch = view.getInt16(2, true);
-            this.trim.trim_yaw = view.getInt16(4, true);
-            this.trim.trim_throttle = view.getInt16(6, true);
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-    clearRange() {
-        this.range._updated = false;
-        this.range.range_left = 0;
-        this.range.range_front = 0;
-        this.range.range_right = 0;
-        this.range.range_rear = 0;
-        this.range.range_top = 0;
-        this.range.range_bottom = 0;
-    }
-
-    updateRange() {
-        this.log(`BASE - updateRange() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 12) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.range._updated = true;
-            this.range.range_left = view.getInt16(0, true) / 1000.0;
-            this.range.range_front = view.getInt16(2, true) / 1000.0;
-            this.range.range_right = view.getInt16(4, true) / 1000.0;
-            this.range.range_rear = view.getInt16(6, true) / 1000.0;
-            this.range.range_top = view.getInt16(8, true) / 1000.0;
-            this.range.range_bottom = view.getInt16(10, true) / 1000.0;
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-    clearBattleIrMessage() {
-        this.battleIrMessage._updated = false;
-        this.battleIrMessage.battle_ir_message = 0;
-    }
-
-    updateBattleIrMessage() {
-        this.log(`BASE - updateBattleIrMessage() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 1) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.battleIrMessage._updated = true;
-            this.battleIrMessage.battle_ir_message = view.getUint8(0, true);
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-    clearCardColor() {
-        this.cardColor._updated = false;
-        this.cardColor.cardColor_frontHue = 0;
-        this.cardColor.cardColor_frontSaturation = 0;
-        this.cardColor.cardColor_frontValue = 0;
-        this.cardColor.cardColor_frontLightness = 0;
-        this.cardColor.cardColor_rearHue = 0;
-        this.cardColor.cardColor_rearSaturation = 0;
-        this.cardColor.cardColor_rearValue = 0;
-        this.cardColor.cardColor_rearLightness = 0;
-        this.cardColor.cardColor_frontColor = 0;
-        this.cardColor.cardColor_rearColor = 0;
-        this.cardColor.cardColor_card = 0;
-    }
-
-    updateCardColor() {
-        this.log(`BASE - updateCardColor() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 19) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.cardColor._updated = true;
-            this.cardColor.cardColor_frontHue = view.getInt16(0, true);
-            this.cardColor.cardColor_frontSaturation = view.getInt16(2, true);
-            this.cardColor.cardColor_frontValue = view.getInt16(4, true);
-            this.cardColor.cardColor_frontLightness = view.getInt16(6, true);
-            this.cardColor.cardColor_rearHue = view.getInt16(8, true);
-            this.cardColor.cardColor_rearSaturation = view.getInt16(10, true);
-            this.cardColor.cardColor_rearValue = view.getInt16(12, true);
-            this.cardColor.cardColor_rearLightness = view.getInt16(14, true);
-            this.cardColor.cardColor_frontColor = view.getUint8(16, true);
-            this.cardColor.cardColor_rearColor = view.getUint8(17, true);
-            this.cardColor.cardColor_card = view.getUint8(18, true);
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-    clearInformationAssembledForEntry() {
-        this.informationAssembledForEntry._updated = false;
-        this.informationAssembledForEntry.informationAssembledForEntry_angleRoll = 0;
-        this.informationAssembledForEntry.informationAssembledForEntry_anglePitch = 0;
-        this.informationAssembledForEntry.informationAssembledForEntry_angleYaw = 0;
-        this.informationAssembledForEntry.informationAssembledForEntry_positionX = 0;
-        this.informationAssembledForEntry.informationAssembledForEntry_positionY = 0;
-        this.informationAssembledForEntry.informationAssembledForEntry_positionZ = 0;
-        this.informationAssembledForEntry.informationAssembledForEntry_rangeHeight = 0;
-        this.informationAssembledForEntry.informationAssembledForEntry_altitude = 0;
-    }
-
-    updateInformationAssembledForEntry() {
-        //this.log(`BASE - updateInformationAssembledForEntry() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 18) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.informationAssembledForEntry._updated = true;
-            this.informationAssembledForEntry.informationAssembledForEntry_angleRoll = view.getInt16(0, true);
-            this.informationAssembledForEntry.informationAssembledForEntry_anglePitch = view.getInt16(2, true);
-            this.informationAssembledForEntry.informationAssembledForEntry_angleYaw = view.getInt16(4, true);
-            this.informationAssembledForEntry.informationAssembledForEntry_positionX = view.getInt16(6, true) / 100.0;
-            this.informationAssembledForEntry.informationAssembledForEntry_positionY = view.getInt16(8, true) / 100.0;
-            this.informationAssembledForEntry.informationAssembledForEntry_positionZ = view.getInt16(10, true) / 100.0;
-            this.informationAssembledForEntry.informationAssembledForEntry_rangeHeight = view.getInt16(12, true) / 1000.0;
-            this.informationAssembledForEntry.informationAssembledForEntry_altitude = view.getFloat32(14, true);
-
-            return true;
-        }
-
-        return false;
-    }
-
     // #endregion Data Update
 
 
@@ -956,7 +515,7 @@ class BigwaveRoboticsBase extends BaseModule {
     // #region check Ack for first connection
 
     checkInitialAck(data, config) {
-        this.receiverForDevice(data);
+        this.receiveFromDevice(data);
 
         if (this.targetDeviceID == undefined) {
             return false;
@@ -996,7 +555,7 @@ class BigwaveRoboticsBase extends BaseModule {
             위와 같은 절차로 데이터를 전송해야 1회만 전송 됨.
             Entry.hw.update를 호출하면 등록된 값 전체를 한 번에 즉시 전송하는 것으로 보임
     */
-    handlerForEntry(handler) {
+    receiveFromEntry(handler) {
         if (this.bufferTransfer == undefined) {
             this.bufferTransfer = [];
         }
@@ -1007,220 +566,6 @@ class BigwaveRoboticsBase extends BaseModule {
         }
 
         const target = this.read(handler, this.DataType.TARGET, 0xFF);
-
-
-        // BATTLE_IR_MESSAGE
-        if (handler.e(this.DataType.BATTLE_IR_MESSAGE)) {
-            const irMessage = this.read(handler, this.DataType.BATTLE_IR_MESSAGE);
-
-            const dataArray = this.reserveBattleIrMessage(target, irMessage);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - BattleIrMessage', dataArray);
-        }
-
-
-        // Light Manual
-        if (handler.e(this.DataType.LIGHT_MANUAL_FLAGS) &&
-            handler.e(this.DataType.LIGHT_MANUAL_BRIGHTNESS)) {
-            const flags = this.read(handler, this.DataType.LIGHT_MANUAL_FLAGS);
-            const brightness = this.read(handler, this.DataType.LIGHT_MANUAL_BRIGHTNESS);
-
-            const dataArray = this.reserveLightManual(target, flags, brightness);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - LightManual', dataArray);
-        }
-
-
-        // LightModeColor
-        if (handler.e(this.DataType.LIGHT_MODE_MODE) &&
-            handler.e(this.DataType.LIGHT_MODE_INTERVAL) &&
-            handler.e(this.DataType.LIGHT_COLOR_R) &&
-            handler.e(this.DataType.LIGHT_COLOR_G) &&
-            handler.e(this.DataType.LIGHT_COLOR_B)) {
-            const mode = this.read(handler, this.DataType.LIGHT_MODE_MODE);
-            const interval = this.read(handler, this.DataType.LIGHT_MODE_INTERVAL);
-            const r = this.read(handler, this.DataType.LIGHT_COLOR_R);
-            const g = this.read(handler, this.DataType.LIGHT_COLOR_G);
-            const b = this.read(handler, this.DataType.LIGHT_COLOR_B);
-
-            const dataArray = this.reserveLightModeColor(target, mode, interval, r, g, b);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - LightModeColor', dataArray);
-        }
-        // LightMode
-        else if (handler.e(this.DataType.LIGHT_MODE_MODE) &&
-            handler.e(this.DataType.LIGHT_MODE_INTERVAL)) {
-            const mode = this.read(handler, this.DataType.LIGHT_MODE_MODE);
-            const interval = this.read(handler, this.DataType.LIGHT_MODE_INTERVAL);
-
-            const dataArray = this.reserveLightMode(target, mode, interval);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - LightMode', dataArray);
-        }
-
-
-        // LightEventColor
-        if (handler.e(this.DataType.LIGHT_EVENT_EVENT) &&
-            handler.e(this.DataType.LIGHT_EVENT_INTERVAL) &&
-            handler.e(this.DataType.LIGHT_EVENT_REPEAT) &&
-            handler.e(this.DataType.LIGHT_COLOR_R) &&
-            handler.e(this.DataType.LIGHT_COLOR_G) &&
-            handler.e(this.DataType.LIGHT_COLOR_B)) {
-            const event = this.read(handler, this.DataType.LIGHT_EVENT_EVENT);
-            const interval = this.read(handler, this.DataType.LIGHT_EVENT_INTERVAL);
-            const repeat = this.read(handler, this.DataType.LIGHT_EVENT_REPEAT);
-            const r = this.read(handler, this.DataType.LIGHT_COLOR_R);
-            const g = this.read(handler, this.DataType.LIGHT_COLOR_G);
-            const b = this.read(handler, this.DataType.LIGHT_COLOR_B);
-
-            const dataArray = this.reserveLightEventColor(target, event, interval, repeat, r, g, b);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - LightEventColor', dataArray);
-        }
-        // LightEvent
-        else if (handler.e(this.DataType.LIGHT_EVENT_EVENT) &&
-            handler.e(this.DataType.LIGHT_EVENT_INTERVAL) &&
-            handler.e(this.DataType.LIGHT_EVENT_REPEAT)) {
-            const event = this.read(handler, this.DataType.LIGHT_EVENT_EVENT);
-            const interval = this.read(handler, this.DataType.LIGHT_EVENT_INTERVAL);
-            const repeat = this.read(handler, this.DataType.LIGHT_EVENT_REPEAT);
-
-            const dataArray = this.reserveLightEvent(target, event, interval, repeat);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - LightEvent', dataArray);
-        }
-
-
-        // 화면 전체 지우기
-        if (handler.e(this.DataType.DISPLAY_CLEAR_ALL_PIXEL)) {
-            const pixel = this.read(handler, this.DataType.DISPLAY_CLEAR_ALL_PIXEL);
-
-            const dataArray = this.reserveDisplayClearAll(target, pixel);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - DisplayClearAll', dataArray);
-        }
-
-
-        // 선택 영역 지우기
-        if (handler.e(this.DataType.DISPLAY_CLEAR_WIDTH) ||
-            handler.e(this.DataType.DISPLAY_CLEAR_HEIGHT)) {
-            const x = this.read(handler, this.DataType.DISPLAY_CLEAR_X);
-            const y = this.read(handler, this.DataType.DISPLAY_CLEAR_Y);
-            const width = this.read(handler, this.DataType.DISPLAY_CLEAR_WIDTH);
-            const height = this.read(handler, this.DataType.DISPLAY_CLEAR_HEIGHT);
-            const pixel = this.read(handler, this.DataType.DISPLAY_CLEAR_PIXEL);
-
-            const dataArray = this.reserveDisplayClear(target, x, y, width, height, pixel);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - DisplayClear', dataArray);
-        }
-
-
-        // 선택 영역 반전
-        if (handler.e(this.DataType.DISPLAY_INVERT_WIDTH) ||
-            handler.e(this.DataType.DISPLAY_INVERT_HEIGHT)) {
-            const x = this.read(handler, this.DataType.DISPLAY_INVERT_X);
-            const y = this.read(handler, this.DataType.DISPLAY_INVERT_Y);
-            const width = this.read(handler, this.DataType.DISPLAY_INVERT_WIDTH);
-            const height = this.read(handler, this.DataType.DISPLAY_INVERT_HEIGHT);
-
-            const dataArray = this.reserveDisplayInvert(target, x, y, width, height);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - DisplayInvert', dataArray);
-        }
-
-
-        // 화면에 점 찍기
-        if (handler.e(this.DataType.DISPLAY_DRAW_POINT_X) ||
-            handler.e(this.DataType.DISPLAY_DRAW_POINT_Y) ||
-            handler.e(this.DataType.DISPLAY_DRAW_POINT_PIXEL)) {
-            const x = this.read(handler, this.DataType.DISPLAY_DRAW_POINT_X);
-            const y = this.read(handler, this.DataType.DISPLAY_DRAW_POINT_Y);
-            const pixel = this.read(handler, this.DataType.DISPLAY_DRAW_POINT_PIXEL);
-
-            const dataArray = this.reserveDisplayDrawPoint(target, x, y, pixel);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - DisplayDrawPoint', dataArray);
-        }
-
-
-        // 화면에 선 그리기
-        if (handler.e(this.DataType.DISPLAY_DRAW_LINE_X1) ||
-            handler.e(this.DataType.DISPLAY_DRAW_LINE_Y1) ||
-            handler.e(this.DataType.DISPLAY_DRAW_LINE_X2) ||
-            handler.e(this.DataType.DISPLAY_DRAW_LINE_Y2)) {
-            const x1 = this.read(handler, this.DataType.DISPLAY_DRAW_LINE_X1);
-            const y1 = this.read(handler, this.DataType.DISPLAY_DRAW_LINE_Y1);
-            const x2 = this.read(handler, this.DataType.DISPLAY_DRAW_LINE_X2);
-            const y2 = this.read(handler, this.DataType.DISPLAY_DRAW_LINE_Y2);
-            const pixel = this.read(handler, this.DataType.DISPLAY_DRAW_LINE_PIXEL);
-            const line = this.read(handler, this.DataType.DISPLAY_DRAW_LINE_LINE);
-
-            const dataArray = this.reserveDisplayDrawLine(target, x1, y1, x2, y2, pixel, line);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - DisplayDrawLine', dataArray);
-        }
-
-
-        // 화면에 사각형 그리기
-        if (handler.e(this.DataType.DISPLAY_DRAW_RECT_WIDTH) ||
-            handler.e(this.DataType.DISPLAY_DRAW_RECT_HEIGHT)) {
-            const x = this.read(handler, this.DataType.DISPLAY_DRAW_RECT_X);
-            const y = this.read(handler, this.DataType.DISPLAY_DRAW_RECT_Y);
-            const width = this.read(handler, this.DataType.DISPLAY_DRAW_RECT_WIDTH);
-            const height = this.read(handler, this.DataType.DISPLAY_DRAW_RECT_HEIGHT);
-            const pixel = this.read(handler, this.DataType.DISPLAY_DRAW_RECT_PIXEL);
-            const flagfill = this.read(handler, this.DataType.DISPLAY_DRAW_RECT_FLAGFILL);
-            const line = this.read(handler, this.DataType.DISPLAY_DRAW_RECT_LINE);
-
-            const dataArray = this.reserveDisplayDrawRect(target, x, y, width, height, pixel, flagfill, line);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - DisplayDrawRect', dataArray);
-        }
-
-
-        // 화면에 원 그리기
-        if (handler.e(this.DataType.DISPLAY_DRAW_CIRCLE_RADIUS)) {
-            const x = this.read(handler, this.DataType.DISPLAY_DRAW_CIRCLE_X);
-            const y = this.read(handler, this.DataType.DISPLAY_DRAW_CIRCLE_Y);
-            const radius = this.read(handler, this.DataType.DISPLAY_DRAW_CIRCLE_RADIUS);
-            const pixel = this.read(handler, this.DataType.DISPLAY_DRAW_CIRCLE_PIXEL);
-            const flagfill = this.read(handler, this.DataType.DISPLAY_DRAW_CIRCLE_FLAGFILL);
-
-            const dataArray = this.reserveDisplayDrawCircle(target, x, y, radius, pixel, flagfill);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - DisplayDrawCircle', dataArray);
-        }
-
-
-        // 화면에 문자열 쓰기
-        if (handler.e(this.DataType.DISPLAY_DRAW_STRING_STRING)) {
-            const x = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_X);
-            const y = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_Y);
-            const font = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_FONT);
-            const pixel = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_PIXEL);
-            const string = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_STRING);
-
-            const dataArray = this.reserveDisplayDrawString(target, x, y, font, pixel, string);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - DisplayDrawString', dataArray);
-        }
-
-
-        // 화면에 문자열 정렬하여 그리기
-        if (handler.e(this.DataType.DISPLAY_DRAW_STRING_ALIGN_STRING)) {
-            const xStart = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_ALIGN_X_START);
-            const xEnd = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_ALIGN_X_END);
-            const y = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_ALIGN_Y);
-            const align = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_ALIGN_ALIGN);
-            const font = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_ALIGN_FONT);
-            const pixel = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_ALIGN_PIXEL);
-            const string = this.read(handler, this.DataType.DISPLAY_DRAW_STRING_ALIGN_STRING);
-
-            const dataArray = this.reserveDisplayDrawStringAlign(target, xStart, xEnd, y, align, font, pixel, string);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - DisplayDrawStringAlign', dataArray);
-        }
 
 
         // Command
@@ -1246,22 +591,6 @@ class BigwaveRoboticsBase extends BaseModule {
             const dataArray = this.reserveCommand(target, command, option);
             this.bufferTransfer.push(dataArray);
             this.log(`BASE - Transfer_To_Device - Command: ${command}, option: ${option}`, dataArray);
-        }
-
-
-        // Trim
-        if (handler.e(this.DataType.TRIM_ROLL) ||
-            handler.e(this.DataType.TRIM_PITCH) ||
-            handler.e(this.DataType.TRIM_YAW) ||
-            handler.e(this.DataType.TRIM_THROTTLE)) {
-            const trimRoll = this.read(handler, this.DataType.TRIM_ROLL);
-            const trimPitch = this.read(handler, this.DataType.TRIM_PITCH);
-            const trimYaw = this.read(handler, this.DataType.TRIM_YAW);
-            const trimThrottle = this.read(handler, this.DataType.TRIM_THROTTLE);
-
-            const dataArray = this.reserveTrim(target, trimRoll, trimPitch, trimYaw, trimThrottle);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - Trim', dataArray);
         }
 
 
@@ -1298,51 +627,6 @@ class BigwaveRoboticsBase extends BaseModule {
             const dataArray = this.reserveControlPosition(target, x, y, z, velocity, heading, rotationalVelocity);
             this.bufferTransfer.push(dataArray);
             this.log('BASE - Transfer_To_Device - ControlPosition', dataArray);
-        }
-
-
-        // MotorSingle
-        if (handler.e(this.DataType.MOTORSINGLE_TARGET)) {
-            const motor = this.read(handler, this.DataType.MOTORSINGLE_TARGET);
-            const value = this.read(handler, this.DataType.MOTORSINGLE_VALUE);
-
-            if (handler.e(this.DataType.MOTORSINGLE_ROTATION)) {
-                const rotation = this.read(handler, this.DataType.MOTORSINGLE_ROTATION);
-
-                const dataArray = this.reserveMotorSingleRV(target, motor, rotation, value);
-                this.bufferTransfer.push(dataArray);
-                this.log('BASE - Transfer_To_Device - MotorSingleRV', dataArray);
-            }
-            else {
-                const dataArray = this.reserveMotorSingleV(target, motor, value);
-                this.bufferTransfer.push(dataArray);
-                this.log('BASE - Transfer_To_Device - MotorSingleV', dataArray);
-            }
-        }
-
-
-        // Buzzer
-        if (handler.e(this.DataType.BUZZER_MODE)) {
-            const mode = this.read(handler, this.DataType.BUZZER_MODE);
-            const value = this.read(handler, this.DataType.BUZZER_VALUE);
-            const time = this.read(handler, this.DataType.BUZZER_TIME);
-
-            const dataArray = this.reserveBuzzer(target, mode, value, time);
-            this.bufferTransfer.push(dataArray);
-            this.log(`BASE - Transfer_To_Device - Buzzer - mode: ${mode}, value: ${value}, time: ${time}`, dataArray);
-        }
-
-
-        // Vibrator
-        if (handler.e(this.DataType.VIBRATOR_ON)) {
-            const mode = this.read(handler, this.DataType.VIBRATOR_MODE);
-            const on = this.read(handler, this.DataType.VIBRATOR_ON);
-            const off = this.read(handler, this.DataType.VIBRATOR_OFF);
-            const total = this.read(handler, this.DataType.VIBRATOR_TOTAL);
-
-            const dataArray = this.reserveVibrator(target, mode, on, off, total);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - Vibrator', dataArray);
         }
     }
 
@@ -1498,148 +782,149 @@ class BigwaveRoboticsBase extends BaseModule {
     // #region Data Receiver from Device
 
     // 장치로부터 받은 데이터 배열 처리
-    receiverForDevice(dataArray) {
-        //this.log(`BASE - receiverForDevice() - Length : ${dataArray.length}`, dataArray);
-
-        if (dataArray == undefined || dataArray.length == 0) {
-            return;
-        }
-
-        const i = 0;
-
-        // 버퍼로부터 데이터를 읽어 하나의 완성된 데이터 블럭으로 변환
-        for (let i = 0; i < dataArray.length; i++) {
-            const data = dataArray[i];
-
-            let flagContinue = true;
-            let flagSessionNext = false;
-            let flagComplete = false;
-
-            switch (this.indexSession) {
-                case 0: // Start Code
-                    {
-                        switch (this.indexReceiver) {
-                            case 0:
-                                if (data != 0x0A) {
-                                    continue;
+    receiveFromDevice(dataArray) {
+        //this.log(`BASE - receiveFromDevice() - Length : ${dataArray.length}`, dataArray);
+        /*
+                if (dataArray == undefined || dataArray.length == 0) {
+                    return;
+                }
+        
+                const i = 0;
+        
+                // 버퍼로부터 데이터를 읽어 하나의 완성된 데이터 블럭으로 변환
+                for (let i = 0; i < dataArray.length; i++) {
+                    const data = dataArray[i];
+        
+                    let flagContinue = true;
+                    let flagSessionNext = false;
+                    let flagComplete = false;
+        
+                    switch (this.indexSession) {
+                        case 0: // Start Code
+                            {
+                                switch (this.indexReceiver) {
+                                    case 0:
+                                        if (data != 0x0A) {
+                                            continue;
+                                        }
+                                        break;
+        
+                                    case 1:
+                                        if (data != 0x55) {
+                                            flagContinue = false;
+                                        }
+                                        else {
+                                            flagSessionNext = true;
+                                        }
+                                        break;
                                 }
-                                break;
-
-                            case 1:
-                                if (data != 0x55) {
-                                    flagContinue = false;
+                            }
+                            break;
+        
+                        case 1: // Header
+                            {
+                                switch (this.indexReceiver) {
+                                    case 0:
+                                        {
+                                            this.dataType = data;
+                                            this.crc16Calculated = this.calcCRC16(data, 0);
+                                        }
+                                        break;
+        
+                                    case 1:
+                                        {
+                                            this.dataLength = data;
+                                            this.crc16Calculated = this.calcCRC16(data, this.crc16Calculated);
+                                        }
+                                        break;
+        
+                                    case 2:
+                                        {
+                                            this.from = data;
+                                            this.crc16Calculated = this.calcCRC16(data, this.crc16Calculated);
+                                        }
+                                        break;
+        
+                                    case 3:
+                                        {
+                                            this.to = data;
+                                            this.crc16Calculated = this.calcCRC16(data, this.crc16Calculated);
+                                            this.dataBlock = [];        // 수신 받은 데이터 블럭
+                                            if (this.dataLength == 0) {
+                                                this.indexSession++;    // 데이터의 길이가 0인 경우 바로 CRC16으로 넘어가게 함
+                                            }
+                                            flagSessionNext = true;
+                                        }
+                                        break;
                                 }
-                                else {
+                            }
+                            break;
+        
+                        case 2: // Data
+                            {
+                                this.dataBlock.push(data);
+                                this.crc16Calculated = this.calcCRC16(data, this.crc16Calculated);
+        
+                                if (this.indexReceiver == this.dataLength - 1) {
                                     flagSessionNext = true;
                                 }
-                                break;
-                        }
+                            }
+                            break;
+        
+                        case 3: // CRC16
+                            {
+                                switch (this.indexReceiver) {
+                                    case 0:
+                                        {
+                                            this.crc16Received = data;
+                                        }
+                                        break;
+        
+                                    case 1:
+                                        {
+                                            this.crc16Received = this.crc16Received + (data << 8);
+                                            flagComplete = true;
+                                        }
+                                        break;
+                                }
+                            }
+                            break;
+        
+                        default:
+                            {
+                                flagContinue = false;
+                            }
+                            break;
                     }
-                    break;
-
-                case 1: // Header
-                    {
-                        switch (this.indexReceiver) {
-                            case 0:
-                                {
-                                    this.dataType = data;
-                                    this.crc16Calculated = this.calcCRC16(data, 0);
-                                }
-                                break;
-
-                            case 1:
-                                {
-                                    this.dataLength = data;
-                                    this.crc16Calculated = this.calcCRC16(data, this.crc16Calculated);
-                                }
-                                break;
-
-                            case 2:
-                                {
-                                    this.from = data;
-                                    this.crc16Calculated = this.calcCRC16(data, this.crc16Calculated);
-                                }
-                                break;
-
-                            case 3:
-                                {
-                                    this.to = data;
-                                    this.crc16Calculated = this.calcCRC16(data, this.crc16Calculated);
-                                    this.dataBlock = [];        // 수신 받은 데이터 블럭
-                                    if (this.dataLength == 0) {
-                                        this.indexSession++;    // 데이터의 길이가 0인 경우 바로 CRC16으로 넘어가게 함
-                                    }
-                                    flagSessionNext = true;
-                                }
-                                break;
+        
+                    // 데이터 전송 완료 처리
+                    if (flagComplete) {
+                        //this.log(`BASE - Receiver - CRC16 - Calculated : ${this.crc16Calculated.toString(16).toUpperCase()}, Received : ${this.crc16Received.toString(16).toUpperCase()}`);
+                        if (this.crc16Calculated == this.crc16Received) {
+                            this.handlerForDevice();
                         }
-                    }
-                    break;
-
-                case 2: // Data
-                    {
-                        this.dataBlock.push(data);
-                        this.crc16Calculated = this.calcCRC16(data, this.crc16Calculated);
-
-                        if (this.indexReceiver == this.dataLength - 1) {
-                            flagSessionNext = true;
-                        }
-                    }
-                    break;
-
-                case 3: // CRC16
-                    {
-                        switch (this.indexReceiver) {
-                            case 0:
-                                {
-                                    this.crc16Received = data;
-                                }
-                                break;
-
-                            case 1:
-                                {
-                                    this.crc16Received = this.crc16Received + (data << 8);
-                                    flagComplete = true;
-                                }
-                                break;
-                        }
-                    }
-                    break;
-
-                default:
-                    {
+        
                         flagContinue = false;
                     }
-                    break;
-            }
-
-            // 데이터 전송 완료 처리
-            if (flagComplete) {
-                //this.log(`BASE - Receiver - CRC16 - Calculated : ${this.crc16Calculated.toString(16).toUpperCase()}, Received : ${this.crc16Received.toString(16).toUpperCase()}`);
-                if (this.crc16Calculated == this.crc16Received) {
-                    this.handlerForDevice();
+        
+                    // 데이터 처리 결과에 따라 인덱스 변수 처리
+                    if (flagContinue) {
+                        if (flagSessionNext) {
+                            this.indexSession++;
+                            this.indexReceiver = 0;
+                        }
+                        else {
+                            this.indexReceiver++;
+                        }
+                    }
+                    else {
+                        this.indexSession = 0;        // 수신 받는 데이터의 세션
+                        this.indexReceiver = 0;        // 수신 받는 데이터의 세션 내 위치
+                    }
                 }
-
-                flagContinue = false;
-            }
-
-            // 데이터 처리 결과에 따라 인덱스 변수 처리
-            if (flagContinue) {
-                if (flagSessionNext) {
-                    this.indexSession++;
-                    this.indexReceiver = 0;
-                }
-                else {
-                    this.indexReceiver++;
-                }
-            }
-            else {
-                this.indexSession = 0;        // 수신 받는 데이터의 세션
-                this.indexReceiver = 0;        // 수신 받는 데이터의 세션 내 위치
-            }
-        }
+                
+        // */
     }
-
     // #endregion Data Receiver from Device
 
 
@@ -1673,7 +958,7 @@ class BigwaveRoboticsBase extends BaseModule {
             break;
         }
         // */
-
+        /*
         this.timeReceive = (new Date()).getTime();
 
         // 상대측에 정상적으로 데이터를 전달했는지 확인
@@ -1716,14 +1001,6 @@ class BigwaveRoboticsBase extends BaseModule {
 
         // 데이터 업데이트
         switch (this.dataType) {
-            case 0x1F:  // Battle
-                {
-                    //this.log("BASE - handlerForDevice() - Received - Battle - 0x1F");
-                    this.updateBattleIrMessage();
-                }
-                break;
-
-
             case 0x40:  // State
                 {
                     //this.log("BASE - handlerForDevice() - Received - State - 0x40");
@@ -1731,82 +1008,10 @@ class BigwaveRoboticsBase extends BaseModule {
                 }
                 break;
 
-
-            case 0x42:  // Position
-                {
-                    //this.log("BASE - handlerForDevice() - Received - Position - 0x42");
-                    this.updatePosition();
-                }
-                break;
-
-
-            case 0x43:  // Altitude
-                {
-                    //this.log("BASE - handlerForDevice() - Received - Altitude - 0x43");
-                    this.updateAltitude();
-                }
-                break;
-
-
-            case 0x44:  // Motion
-                {
-                    //this.log("BASE - handlerForDevice() - Received - Motion - 0x44");
-                    this.updateMotion();
-                }
-                break;
-
-
-            case 0x45:  // Range
-                {
-                    //this.log("BASE - handlerForDevice() - Received - Range - 0x45");
-                    this.updateRange();
-                }
-                break;
-
-
-            case 0x52:  // Trim
-                {
-                    //this.log("BASE - handlerForDevice() - Received - Trim - 0x52");
-                    this.updateTrim();
-                }
-                break;
-
-
-            case 0x70:  // Button
-                {
-                    //this.log("BASE - handlerForDevice() - Received - Button - 0x70");
-                    this.updateButton();
-                }
-                break;
-
-
-            case 0x71:  // Joystick
-                {
-                    //this.log("BASE - handlerForDevice() - Received - Joystick - 0x71");
-                    this.updateJoystick();
-                }
-                break;
-
-
-            case 0x93:  // CardColor
-                {
-                    //this.log("BASE - handlerForDevice() - Received - CardColor - 0x93");
-                    this.updateCardColor();
-                }
-                break;
-
-
-            case 0xA1:  // Information Assembled For Entry 자주 갱신되는 데이터 모음(엔트리)
-                {
-                    //this.log("BASE - handlerForDevice() - Received - InformationAssembledForEntry - 0xA1");
-                    this.updateInformationAssembledForEntry();
-                }
-                break;
-
-
             default:
                 break;
         }
+        // */
     }
 
     // #endregion Data Receiver for received data from Device
@@ -1911,7 +1116,7 @@ class BigwaveRoboticsBase extends BaseModule {
      *  Communciation - 장치 전송용 데이터 배열 생성
      ***************************************************************************************/
     // #region Data Transfer Functions for Device
-
+/*
     // Ping
     reservePing(target) {
         const dataArray = new ArrayBuffer(8);
@@ -1950,350 +1155,11 @@ class BigwaveRoboticsBase extends BaseModule {
     }
 
 
-    // Light Manual
-    reserveLightManual(target, flag, brightness) {
-        const dataArray = new ArrayBuffer(3);
-        const view = new DataView(dataArray);
-
-        view.setUint16(0, this.fit(0, flag, 0xFFFF), true);
-        view.setUint8(2, this.fit(0, brightness, 0xFF));
-
-        this.log(`BASE - reserveLightManual() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x20, target, dataArray);
-    }
-
-
-    // BattleIrMessage
-    reserveBattleIrMessage(target, irMessage) {
-        const dataArray = new ArrayBuffer(1);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, irMessage, 0xFF), true);
-
-        this.log(`BASE - reserveBattleIrMessage() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x1F, target, dataArray);
-    }
-
-
-    // LightModeColor
-    reserveLightModeColor(target, mode, interval, r, g, b) {
-        const dataArray = new ArrayBuffer(6);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, mode, 0xFF));
-        view.setUint16(1, this.fit(0, interval, 0xFFFF), true);
-        view.setUint8(3, this.fit(0, r, 0xFF));
-        view.setUint8(4, this.fit(0, g, 0xFF));
-        view.setUint8(5, this.fit(0, b, 0xFF));
-
-        this.log(`BASE - reserveLightModeColor() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x21, target, dataArray);
-    }
-
-
-    // LightMode
-    reserveLightMode(target, mode, interval) {
-        const dataArray = new ArrayBuffer(3);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, mode, 0xFF));
-        view.setUint16(1, this.fit(0, interval, 0xFF), true);
-
-        this.log(`BASE - reserveLightMode() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x21, target, dataArray);
-    }
-
-
-    // LightEventColor
-    reserveLightEventColor(target, event, interval, repeat, r, g, b) {
-        const dataArray = new ArrayBuffer(7);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, event, 0xFF));
-        view.setUint16(1, this.fit(0, interval, 0xFFFF), true);
-        view.setUint8(3, this.fit(0, repeat, 0xFF));
-        view.setUint8(4, this.fit(0, r, 0xFF));
-        view.setUint8(5, this.fit(0, g, 0xFF));
-        view.setUint8(6, this.fit(0, b, 0xFF));
-
-        this.log(`BASE - reserveLightEventColor() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x22, target, dataArray);
-    }
-
-
-    // LightEvent
-    reserveLightEvent(target, event, interval, repeat) {
-        const dataArray = new ArrayBuffer(4);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, event, 0xFF));
-        view.setUint16(1, this.fit(0, interval, 0xFFFF), true);
-        view.setUint8(3, this.fit(0, repeat, 0xFF));
-
-        this.log(`BASE - reserveLightEvent() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x22, target, dataArray);
-    }
-
-
-    // DisplayClearAll
-    reserveDisplayClearAll(target, pixel) {
-        const dataArray = new ArrayBuffer(1);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, pixel, 0xFF));
-
-        this.log(`BASE - reserveDisplayClearAll() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x80, target, dataArray);
-    }
-
-
-    // DisplayClear
-    reserveDisplayClear(target, x, y, width, height, pixel) {
-        const dataArray = new ArrayBuffer(9);
-        const view = new DataView(dataArray);
-
-        view.setInt16(0, this.fit(-4096, x, 4095), true);
-        view.setInt16(2, this.fit(-4096, y, 4095), true);
-        view.setInt16(4, this.fit(-4096, width, 4095), true);
-        view.setInt16(6, this.fit(-4096, height, 4095), true);
-        view.setUint8(8, this.fit(0, pixel, 0xFF));
-
-        this.log(`BASE - reserveDisplayClear() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x80, target, dataArray);
-    }
-
-
-    // DisplayInvert
-    reserveDisplayInvert(target, x, y, width, height) {
-        const dataArray = new ArrayBuffer(8);
-        const view = new DataView(dataArray);
-
-        view.setInt16(0, this.fit(-4096, x, 4095), true);
-        view.setInt16(2, this.fit(-4096, y, 4095), true);
-        view.setInt16(4, this.fit(-4096, width, 4095), true);
-        view.setInt16(6, this.fit(-4096, height, 4095), true);
-
-        this.log(`BASE - reserveDisplayInvert() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x81, target, dataArray);
-    }
-
-
-    // DisplayDrawPoint
-    reserveDisplayDrawPoint(target, x, y, pixel) {
-        const dataArray = new ArrayBuffer(5);
-        const view = new DataView(dataArray);
-
-        view.setInt16(0, this.fit(-4096, x, 4095), true);
-        view.setInt16(2, this.fit(-4096, y, 4095), true);
-        view.setUint8(4, this.fit(0, pixel, 0xFF));
-
-        this.log(`BASE - reserveDisplayDrawPoint() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x82, target, dataArray);
-    }
-
-
-    // DisplayDrawLine
-    reserveDisplayDrawLine(target, x1, y1, x2, y2, pixel, line) {
-        const dataArray = new ArrayBuffer(10);
-        const view = new DataView(dataArray);
-
-        view.setInt16(0, this.fit(-4096, x1, 4095), true);
-        view.setInt16(2, this.fit(-4096, y1, 4095), true);
-        view.setInt16(4, this.fit(-4096, x2, 4095), true);
-        view.setInt16(6, this.fit(-4096, y2, 4095), true);
-        view.setUint8(8, this.fit(0, pixel, 0xFF));
-        view.setUint8(9, this.fit(0, line, 0xFF));
-
-        this.log(`BASE - reserveDisplayDrawLine() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x83, target, dataArray);
-    }
-
-
-    // DisplayDrawRect
-    reserveDisplayDrawRect(target, x, y, width, height, pixel, flagFill, line) {
-        const dataArray = new ArrayBuffer(11);
-        const view = new DataView(dataArray);
-
-        view.setInt16(0, this.fit(-4096, x, 4095), true);
-        view.setInt16(2, this.fit(-4096, y, 4095), true);
-        view.setInt16(4, this.fit(1, width, 4095), true);
-        view.setInt16(6, this.fit(1, height, 4095), true);
-        view.setUint8(8, this.fit(0, pixel, 0xFF));
-        view.setUint8(9, this.fit(0, flagFill, 0xFF));
-        view.setUint8(10, this.fit(0, line, 0xFF));
-
-        this.log(`BASE - reserveDisplayDrawRect() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x84, target, dataArray);
-    }
-
-
-    // DisplayDrawCircle
-    reserveDisplayDrawCircle(target, x, y, radius, pixel, flagFill) {
-        const dataArray = new ArrayBuffer(8);
-        const view = new DataView(dataArray);
-
-        view.setInt16(0, this.fit(-4096, x, 4095), true);
-        view.setInt16(2, this.fit(-4096, y, 4095), true);
-        view.setInt16(4, this.fit(1, radius, 4095), true);
-        view.setUint8(6, this.fit(0, pixel, 0xFF));
-        view.setUint8(7, this.fit(0, flagFill, 0xFF));
-
-        this.log(`BASE - reserveDisplayDrawCircle() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x85, target, dataArray);
-    }
-
-
-    // DisplayDrawString
-    reserveDisplayDrawString(target, x, y, font, pixel, string) {
-        const byteArrayString = this.stringToAsciiByteArray(string);
-
-        const dataArray = new ArrayBuffer(6 + byteArrayString.length);
-        const view = new DataView(dataArray);
-
-        view.setInt16(0, this.fit(-4096, x, 4095), true);
-        view.setInt16(2, this.fit(-4096, y, 4095), true);
-        view.setUint8(4, this.fit(0, font, 0xFF));
-        view.setUint8(5, this.fit(0, pixel, 0xFF));
-
-        for (let i = 0; i < byteArrayString.length; i++) {
-            view.setUint8((6 + i), byteArrayString[i]);
-        }
-
-        this.log(`BASE - reserveDisplayDrawString() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x86, target, dataArray);
-    }
-
-
-    // DisplayDrawString
-    reserveDisplayDrawStringAlign(target, xStart, xEnd, y, align, font, pixel, string) {
-        const byteArrayString = this.stringToAsciiByteArray(string);
-
-        const dataArray = new ArrayBuffer(9 + byteArrayString.length);
-        const view = new DataView(dataArray);
-
-        view.setInt16(0, this.fit(-4096, xStart, 4095), true);
-        view.setInt16(2, this.fit(-4096, xEnd, 4095), true);
-        view.setInt16(4, this.fit(-4096, y, 4095), true);
-        view.setUint8(6, this.fit(0, align, 0xFF));
-        view.setUint8(7, this.fit(0, font, 0xFF));
-        view.setUint8(8, this.fit(0, pixel, 0xFF));
-
-        for (let i = 0; i < byteArrayString.length; i++) {
-            view.setUint8((9 + i), byteArrayString[i]);
-        }
-
-        this.log(`BASE - reserveDisplayDrawStringAlign() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x87, target, dataArray);
-    }
-
-
-    // Trim
-    reserveTrim(target, roll, pitch, yaw, throttle) {
-        const dataArray = new ArrayBuffer(8);
-        const view = new DataView(dataArray);
-
-        view.setInt16(0, this.fit(-100, roll, 100), true);
-        view.setInt16(2, this.fit(-100, pitch, 100), true);
-        view.setInt16(4, this.fit(-100, yaw, 100), true);
-        view.setInt16(6, this.fit(-100, throttle, 100), true);
-
-        this.log(`BASE - reserveTrim() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x52, target, dataArray);
-    }
-
-
-    // ControlQuad8
-    reserveControlQuad8(target, roll, pitch, yaw, throttle) {
-        const dataArray = new ArrayBuffer(4);
-        const view = new DataView(dataArray);
-
-        view.setInt8(0, this.fit(-120, roll, 120));
-        view.setInt8(1, this.fit(-120, pitch, 120));
-        view.setInt8(2, this.fit(-120, yaw, 120));
-        view.setInt8(3, this.fit(-120, throttle, 120));
-
-        this.log(`BASE - reserveControlQuad8() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x10, target, dataArray);
-    }
-
-
-    // ControlPosition
-    reserveControlPosition(target, x, y, z, velocity, heading, rotationalVelocity) {
-        const dataArray = new ArrayBuffer(20);
-        const view = new DataView(dataArray);
-
-        view.setFloat32(0, x, true);
-        view.setFloat32(4, y, true);
-        view.setFloat32(8, z, true);
-        view.setFloat32(12, velocity, true);
-        view.setInt16(16, this.fit(-3600, heading, 3600), true);
-        view.setInt16(18, this.fit(-3600, rotationalVelocity, 3600), true);
-
-        this.log(`BASE - reserveControlPosition() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x10, target, dataArray);
-    }
-
-
-    // MotorSingleRV
-    reserveMotorSingleRV(target, motor, rotation, value) {
-        const dataArray = new ArrayBuffer(4);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, motor, 0xFF));
-        view.setUint8(1, this.fit(0, rotation, 0xFF));
-        view.setInt16(2, this.fit(-4095, value, 4095), true);
-
-        this.log(`BASE - reserveMotorSingleRV() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x61, target, dataArray);
-    }
-
-
-    // MotorSingleV
-    reserveMotorSingleV(target, motor, value) {
-        const dataArray = new ArrayBuffer(3);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, motor, 0xFF));
-        view.setInt16(1, this.fit(-4095, value, 4095), true);
-
-        this.log(`BASE - reserveMotorSingleV() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x61, target, dataArray);
-    }
-
-
-    // Buzzer
-    reserveBuzzer(target, mode, value, time) {
-        const dataArray = new ArrayBuffer(5);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, mode, 0xFF));
-        view.setUint16(1, this.fit(0, value, 0xFFFF), true);
-        view.setUint16(3, this.fit(0, time, 0xFFFF), true);
-
-        this.log(`BASE - reserveBuzzer() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x62, target, dataArray);
-    }
-
-
-    // Vibrator
-    reserveVibrator(target, mode, on, off, total) {
-        const dataArray = new ArrayBuffer(7);
-        const view = new DataView(dataArray);
-
-        view.setUint8(0, this.fit(0, mode, 0xFF));
-        view.setUint16(1, this.fit(0, on, 0xFFFF), true);
-        view.setUint16(3, this.fit(0, off, 0xFFFF), true);
-        view.setUint16(5, this.fit(0, total, 0xFFFF), true);
-
-        this.log(`BASE - reserveVibrator() - Target: 0x${target.toString(16).toUpperCase()}`);
-        return this.createTransferBlock(0x63, target, dataArray);
-    }
-
 
     // 전송 데이터 배열 생성
     // https://cryingnavi.github.io/javascript-typedarray/
-    createTransferBlock(dataType, to, dataBuffer) {
-        const dataBlock = new ArrayBuffer(2 + 4 + dataBuffer.byteLength + 2);  // Start Code + Header + Data + CRC16
+    createTransferBlock(dataType, dataBuffer) {
+        const dataBlock = new ArrayBuffer(2 + 4 + dataBuffer.byteLength + 2);  // Start Code + Header(length 4 byte) + Data + CRC16
         const view = new DataView(dataBlock);
         const dataArray = new Uint8Array(dataBuffer);
 
@@ -2307,8 +1173,6 @@ class BigwaveRoboticsBase extends BaseModule {
         {
             view.setUint8(2, this.fit(0, dataType, 0xFF));              // Data Type
             view.setUint8(3, this.fit(0, dataBuffer.byteLength, 0xFF)); // Data Length
-            view.setUint8(4, 0x82);                                     // From (네이버 엔트리)
-            view.setUint8(5, this.fit(0, to, 0xFF));                    // To
         }
 
         // Data
@@ -2333,7 +1197,7 @@ class BigwaveRoboticsBase extends BaseModule {
         //this.log("BASE - createTransferBlock() - ", Array.from(new Uint8Array(dataBlock)))
         return Array.from(new Uint8Array(dataBlock));
     }
-
+// */
 
     fit(min, value, max) {
         return Math.max(Math.min(value, max), min);
@@ -2345,110 +1209,8 @@ class BigwaveRoboticsBase extends BaseModule {
         return ((value >> (index << 3)) & 0xff);
     }
 
-
-    // 문자열을 ASCII 바이트 배열로 변환
-    // https://stackoverflow.com/questions/6226189/how-to-convert-a-string-to-bytearray
-    stringToAsciiByteArray(str) {
-        const bytes = [];
-        for (let i = 0; i < str.length; i++) {
-            const charCode = str.charCodeAt(i);
-            if (charCode > 0xFF)  // char > 1 byte since charCodeAt returns the UTF-16 value
-            {
-                //throw new Error(`Character ${String.fromCharCode(charCode)} can't be represented by a US-ASCII byte.`);
-                continue;
-            }
-            bytes.push(charCode);
-        }
-        return bytes;
-    }
-
     // #endregion Data Transfer Functions for Device
 
-
-
-    /***************************************************************************************
-     *  CRC16
-     ***************************************************************************************/
-    // #region CRC16
-
-    /*
-    * Copyright 2001-2010 Georges Menie (www.menie.org)
-    * All rights reserved.
-    * Redistribution and use in source and binary forms, with or without
-    * modification, are permitted provided that the following conditions are met:
-    *
-    *     * Redistributions of source code must retain the above copyright
-    *       notice, this list of conditions and the following disclaimer.
-    *     * Redistributions in binary form must reproduce the above copyright
-    *       notice, this list of conditions and the following disclaimer in the
-    *       documentation and/or other materials provided with the distribution.
-    *     * Neither the name of the University of California, Berkeley nor the
-    *       names of its contributors may be used to endorse or promote products
-    *       derived from this software without specific prior written permission.
-    *
-    * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY
-    * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-    * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-    * DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY
-    * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-    * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-    * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-    * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-    * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-    * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-    */
-    createCRC16Array() {
-        this.log('BASE - createCRC16Array()');
-
-        this.crc16table =
-            [
-                0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50a5, 0x60c6, 0x70e7,
-                0x8108, 0x9129, 0xa14a, 0xb16b, 0xc18c, 0xd1ad, 0xe1ce, 0xf1ef,
-                0x1231, 0x0210, 0x3273, 0x2252, 0x52b5, 0x4294, 0x72f7, 0x62d6,
-                0x9339, 0x8318, 0xb37b, 0xa35a, 0xd3bd, 0xc39c, 0xf3ff, 0xe3de,
-                0x2462, 0x3443, 0x0420, 0x1401, 0x64e6, 0x74c7, 0x44a4, 0x5485,
-                0xa56a, 0xb54b, 0x8528, 0x9509, 0xe5ee, 0xf5cf, 0xc5ac, 0xd58d,
-                0x3653, 0x2672, 0x1611, 0x0630, 0x76d7, 0x66f6, 0x5695, 0x46b4,
-                0xb75b, 0xa77a, 0x9719, 0x8738, 0xf7df, 0xe7fe, 0xd79d, 0xc7bc,
-                0x48c4, 0x58e5, 0x6886, 0x78a7, 0x0840, 0x1861, 0x2802, 0x3823,
-                0xc9cc, 0xd9ed, 0xe98e, 0xf9af, 0x8948, 0x9969, 0xa90a, 0xb92b,
-                0x5af5, 0x4ad4, 0x7ab7, 0x6a96, 0x1a71, 0x0a50, 0x3a33, 0x2a12,
-                0xdbfd, 0xcbdc, 0xfbbf, 0xeb9e, 0x9b79, 0x8b58, 0xbb3b, 0xab1a,
-                0x6ca6, 0x7c87, 0x4ce4, 0x5cc5, 0x2c22, 0x3c03, 0x0c60, 0x1c41,
-                0xedae, 0xfd8f, 0xcdec, 0xddcd, 0xad2a, 0xbd0b, 0x8d68, 0x9d49,
-                0x7e97, 0x6eb6, 0x5ed5, 0x4ef4, 0x3e13, 0x2e32, 0x1e51, 0x0e70,
-                0xff9f, 0xefbe, 0xdfdd, 0xcffc, 0xbf1b, 0xaf3a, 0x9f59, 0x8f78,
-                0x9188, 0x81a9, 0xb1ca, 0xa1eb, 0xd10c, 0xc12d, 0xf14e, 0xe16f,
-                0x1080, 0x00a1, 0x30c2, 0x20e3, 0x5004, 0x4025, 0x7046, 0x6067,
-                0x83b9, 0x9398, 0xa3fb, 0xb3da, 0xc33d, 0xd31c, 0xe37f, 0xf35e,
-                0x02b1, 0x1290, 0x22f3, 0x32d2, 0x4235, 0x5214, 0x6277, 0x7256,
-                0xb5ea, 0xa5cb, 0x95a8, 0x8589, 0xf56e, 0xe54f, 0xd52c, 0xc50d,
-                0x34e2, 0x24c3, 0x14a0, 0x0481, 0x7466, 0x6447, 0x5424, 0x4405,
-                0xa7db, 0xb7fa, 0x8799, 0x97b8, 0xe75f, 0xf77e, 0xc71d, 0xd73c,
-                0x26d3, 0x36f2, 0x0691, 0x16b0, 0x6657, 0x7676, 0x4615, 0x5634,
-                0xd94c, 0xc96d, 0xf90e, 0xe92f, 0x99c8, 0x89e9, 0xb98a, 0xa9ab,
-                0x5844, 0x4865, 0x7806, 0x6827, 0x18c0, 0x08e1, 0x3882, 0x28a3,
-                0xcb7d, 0xdb5c, 0xeb3f, 0xfb1e, 0x8bf9, 0x9bd8, 0xabbb, 0xbb9a,
-                0x4a75, 0x5a54, 0x6a37, 0x7a16, 0x0af1, 0x1ad0, 0x2ab3, 0x3a92,
-                0xfd2e, 0xed0f, 0xdd6c, 0xcd4d, 0xbdaa, 0xad8b, 0x9de8, 0x8dc9,
-                0x7c26, 0x6c07, 0x5c64, 0x4c45, 0x3ca2, 0x2c83, 0x1ce0, 0x0cc1,
-                0xef1f, 0xff3e, 0xcf5d, 0xdf7c, 0xaf9b, 0xbfba, 0x8fd9, 0x9ff8,
-                0x6e17, 0x7e36, 0x4e55, 0x5e74, 0x2e93, 0x3eb2, 0x0ed1, 0x1ef0,
-            ];
-    }
-
-    calcCRC16(data, crc) {
-        if (data > 255) {
-            throw new RangeError();
-        }
-
-        const index = ((crc >> 8) ^ data) & 0x00FF;
-        const crcNext = ((crc << 8) & 0xFFFF) ^ this.crc16table[index];
-
-        return crcNext;
-    }
-
-    // #endregion CRC16
 
 
 

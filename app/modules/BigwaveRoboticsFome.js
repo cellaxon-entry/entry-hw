@@ -1,14 +1,14 @@
 /* eslint-disable brace-style */
 /*jshint esversion: 6 */
 
-const byrobot_base = require('./byrobot_base');
+const BigwaveRoboticsBase = require('./BigwaveRoboticsBase');
 
 
 /***************************************************************************************
  *  BYROBOT Battle Drone Controller
  ***************************************************************************************/
 
-class byrobot_controller_3_4 extends byrobot_base
+class BigwaveRoboticsFome extends BigwaveRoboticsBase
 {
     /*
         생성자
@@ -17,7 +17,7 @@ class byrobot_controller_3_4 extends byrobot_base
     {
         super();
 
-        this.log('BYROBOT_BATTLE_DRONE_CCONTROLLER - constructor()');
+        this.log('Bigwave Robotics Fome - constructor()');
 
         this.targetDevice     = 0x20;
         this.targetDeviceID   = '0F0C01';
@@ -25,4 +25,4 @@ class byrobot_controller_3_4 extends byrobot_base
     }
 }
 
-module.exports = new byrobot_controller_3_4();
+module.exports = new BigwaveRoboticsFome();
