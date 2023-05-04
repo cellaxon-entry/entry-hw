@@ -1,0 +1,22 @@
+{
+    "id": "0F0C01",
+    "name": {
+        "en": "Bigwave Robotics Fome",
+        "ko": "빅웨이브 로보틱스 포미 "
+    },
+    "category": "robot",
+    "platform": ["win32", "darwin"],
+    "icon" : "BigwaveRoboticsFome.png",
+    "module": "BigwaveRoboticsFome.js",
+    "url": "https://www.myrobotsolution.com/",
+    "email": "help@bigwaverobotics.com/",
+    "reconnect": true,
+    "selectPort": true,
+    "hardware": {
+        "type": "bluetooth",
+        "control": "slave",
+        "vendor": "Microsoft",
+        "duration": 32,
+        "baudRate": 115200
+    }
+}
