@@ -142,9 +142,8 @@ class BigwaveRoboticsBase extends BaseModule {
         slave 모드인 경우 duration 속성 간격으로 지속적으로 기기에 요청을 보냅니다.
     */
     requestLocalData() {
-        //this.log("BASE - requestLocalData()");
-        //return this.transferToDevice();
-        return null;
+        //this.log('BASE - requestLocalData()');
+        return this.transferToDevice();
     }
 
 
@@ -316,21 +315,15 @@ class BigwaveRoboticsBase extends BaseModule {
             Entry.hw.update를 호출하면 등록된 값 전체를 한 번에 즉시 전송하는 것으로 보임
     */
     receiveFromEntry(handler) {
-        if (this.bufferTransfer == undefined) {
-            this.bufferTransfer = [];
-        }
-
-        // Buffer Clear
-        if (handler.e(this.DataType.BUFFER_CLEAR)) {
-            this.bufferTransfer = [];
-        }
-
         // Json Body
         if (handler.e(this.DataType.JSON_BODY)) {
-            this.log(`BASE - jsonBody: ${jsonBody}`);
-
             const jsonBody = this.read(handler, this.DataType.JSON_BODY);
-            this.bufferTransfer.push(this.createTransferBlock(jsonBody));
+            const dataArray = this.createTransferBlock(jsonBody);
+
+            this.serialport.write(dataArray);		
+
+            this.log(`BASE - jsonBody: ${jsonBody}`);
+            this.log(`     - dataArray: ${dataArray}`);
         }
     }
 
@@ -384,26 +377,24 @@ class BigwaveRoboticsBase extends BaseModule {
 
     // 장치에 데이터 전송
     transferToDevice() {
-        const now = (new Date()).getTime();
-
-        if (now < this.timeTransferNext) {
+        if (this.bufferTransfer == undefined)
+        {
+            this.bufferTransfer = [];
             return null;
         }
 
-        this.timeTransferNext = now + this.timeTransferInterval;
-
-        if (this.bufferTransfer == undefined) {
-            this.bufferTransfer = [];
+        if (this.bufferTransfer.length == 0) {
+            return null;
         }
 
         // 예약된 데이터 전송 처리
-        const arrayTransfer = this.bufferTransfer[0];           // 전송할 데이터 배열(첫 번째 데이터 블럭 전송)
+        const arrayTransfer = this.bufferTransfer;           // 전송할 데이터 배열(첫 번째 데이터 블럭 전송)
         this.countTransferRepeat++;
         this.timeTransfer = (new Date()).getTime();
 
-        // maxTransferRepeat 이상 전송했음에도 응답이 없는 경우엔 다음으로 넘어감
+        // maxTransferRepeat 이상 전송했음에도 응답이 없는 경우 데이터 전송 중단
         if (this.countTransferRepeat >= this.maxTransferRepeat) {
-            this.bufferTransfer.shift();
+            this.bufferTransfer = [];
             this.countTransferRepeat = 0;
         }
 
