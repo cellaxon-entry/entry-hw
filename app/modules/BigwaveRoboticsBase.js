@@ -24,8 +24,6 @@ class BigwaveRoboticsBase extends BaseModule {
         this.log('BigwaveRoboticsBase');
         this.log('BASE - constructor()');
 
-        this.createCRC16Array();
-
         this.serialport = undefined;
         this.isConnect = false;
 
@@ -51,10 +49,6 @@ class BigwaveRoboticsBase extends BaseModule {
             // Control::Position
             CONTROL_POSITION_X: 'control_position_x',
             CONTROL_POSITION_Y: 'control_position_y',
-            CONTROL_POSITION_Z: 'control_position_z',
-            CONTROL_POSITION_VELOCITY: 'control_position_velocity',
-            CONTROL_POSITION_HEADING: 'control_position_heading',
-            CONTROL_POSITION_ROTATIONAL_VELOCITY: 'control_position_rotational_velocity',
 
             // Command
             COMMAND_COMMAND: 'command_command',
@@ -75,146 +69,15 @@ class BigwaveRoboticsBase extends BaseModule {
         };
 
 
-        // Joystick
-        this.joystick =
-        {
-            _updated: 1,
-            joystick_left_x: 0,    // s8
-            joystick_left_y: 0,    // s8
-            joystick_left_direction: 0,    // u8
-            joystick_left_event: 0,    // u8
-            joystick_right_x: 0,    // s8
-            joystick_right_y: 0,    // s8
-            joystick_right_direction: 0,    // u8
-            joystick_right_event: 0,    // u8
-        };
-
-
-        // Button
-        this.button =
-        {
-            _updated: 1,
-            button_button: 0,    // u16
-            button_event: 0,    // u8
-        };
-
 
         // State
         this.state =
         {
             _updated: 1,
-            state_modeSystem: 0,    // u8
-            state_modeFlight: 0,    // u8
-            state_modeControlFlight: 0,    // u8
             state_modeMovement: 0,    // u8
-            state_headless: 0,    // u8
-            state_controlSpeed: 0,    // u8
-            state_sensorOrientation: 0,    // u8
             state_battery: 0,    // u8
         };
 
-
-        // Altitude
-        this.altitude =
-        {
-            _updated: 1,
-            altitude_temperature: 0,   // f32
-            altitude_pressure: 0,   // f32
-            altitude_altitude: 0,   // f32
-            altitude_rangeHeight: 0,   // f32
-        };
-
-
-        // Position
-        this.position =
-        {
-            _updated: 1,
-            position_x: 0,   // f32
-            position_y: 0,   // f32
-            position_z: 0,   // f32
-        };
-
-
-        // Motion
-        this.motion =
-        {
-            _updated: 1,
-            motion_accelX: 0,    // s16
-            motion_accelY: 0,    // s16
-            motion_accelZ: 0,    // s16
-            motion_gyroRoll: 0,    // s16
-            motion_gyroPitch: 0,    // s16
-            motion_gyroYaw: 0,    // s16
-            motion_angleRoll: 0,    // s16
-            motion_anglePitch: 0,    // s16
-            motion_angleYaw: 0,    // s16
-        };
-
-
-        // Trim
-        this.trim =
-        {
-            _updated: 1,
-            trim_roll: 0,    // s16
-            trim_pitch: 0,    // s16
-            trim_yaw: 0,    // s16
-            trim_throttle: 0,    // s16
-        };
-
-
-        // Range
-        this.range =
-        {
-            _updated: 1,
-            range_left: 0,    // u16
-            range_front: 0,    // u16
-            range_right: 0,    // u16
-            range_rear: 0,    // u16
-            range_top: 0,    // u16
-            range_bottom: 0,    // u16
-        };
-
-
-        // BattleIrMessage
-        this.battleIrMessage =
-        {
-            _updated: 1,
-            battle_ir_message: 0,    // u32
-        };
-
-
-        // CardColor
-        this.cardColor =
-        {
-            _updated: 1,
-            cardColor_frontHue: 0,    // u16
-            cardColor_frontSaturation: 0,    // u16
-            cardColor_frontValue: 0,    // u16
-            cardColor_frontLightness: 0,    // u16
-            cardColor_rearHue: 0,    // u16
-            cardColor_rearSaturation: 0,    // u16
-            cardColor_rearValue: 0,    // u16
-            cardColor_rearLightness: 0,    // u16
-            cardColor_frontColor: 0,    // u8
-            cardColor_rearColor: 0,    // u8
-            cardColor_card: 0,    // u8
-        };
-
-
-
-        // InformationAssembledForEntry
-        this.informationAssembledForEntry =
-        {
-            _updated: 1,
-            informationAssembledForEntry_angleRoll: 0,    // s16
-            informationAssembledForEntry_anglePitch: 0,    // s16
-            informationAssembledForEntry_angleYaw: 0,    // s16
-            informationAssembledForEntry_positionX: 0,    // s16
-            informationAssembledForEntry_positionY: 0,    // s16
-            informationAssembledForEntry_positionZ: 0,    // s16
-            informationAssembledForEntry_rangeHeight: 0,    // s16
-            informationAssembledForEntry_altitude: 0,    // float
-        };
 
 
         // 변수 초기화
@@ -237,14 +100,14 @@ class BigwaveRoboticsBase extends BaseModule {
         초기설정
 
         최초에 커넥션이 이루어진 후의 초기 설정.
-        handler 는 워크스페이스와 통신하 데이터를 json 화 하는 오브젝트입니다. (datahandler/json 참고)
+        handler 는 워크스페이스와 통신한 데이터를 json 화 하는 오브젝트입니다. (datahandler/json 참고)
         config 은 module.json 오브젝트입니다.
     */
     init(handler, config) {
         super.init(handler, config);
 
         this.log('BASE - init()');
-        this.resetData();
+        //this.resetData();
     }
 
 
@@ -259,6 +122,7 @@ class BigwaveRoboticsBase extends BaseModule {
         this.isConnect = true;
         this.serialport = serialport;
 
+        return true;
         /*
         //this.log(`BASE - requestInitialData(0x${this.targetDevice.toString(16).toUpperCase()})`);
         return this.reservePing(this.targetDevice);
@@ -295,7 +159,8 @@ class BigwaveRoboticsBase extends BaseModule {
     */
     requestLocalData() {
         //this.log("BASE - requestLocalData()");
-        return this.transferToDevice();
+        //return this.transferToDevice();
+        return null;
     }
 
 
@@ -372,14 +237,6 @@ class BigwaveRoboticsBase extends BaseModule {
     }
 
     clearVariable() {
-        // -- Control -----------------------------------------------------------------
-        this.controlWheel = 0;      //
-        this.controlAccel = 0;      //
-        this.controlRoll = 0;       //
-        this.controlPitch = 0;      //
-        this.controlYaw = 0;        //
-        this.controlThrottle = 0;   //
-
         // -- Hardware ----------------------------------------------------------------
         this.bufferReceive = [];    // 데이터 수신 버퍼
         this.bufferTransfer = [];   // 데이터 송신 버퍼
@@ -395,7 +252,7 @@ class BigwaveRoboticsBase extends BaseModule {
         this.crc16Received = 0;     // CRC16 수신값
         this.crc16Transfered = 0;   // 전송한 데이터의 crc16
 
-        this.maxTransferRepeat = 3;         // 최대 반복 전송 횟수
+        this.maxTransferRepeat = 1;         // 최대 반복 전송 횟수
         this.countTransferRepeat = 0;       // 반복 전송 횟수
         this.dataTypeLastTransfered = 0;    // 마지막으로 전송한 데이터의 타입
 
@@ -416,41 +273,9 @@ class BigwaveRoboticsBase extends BaseModule {
      ***************************************************************************************/
     // #region Data Update
 
-    clearAck() {
-        this.ack._updated = false;
-        this.ack.ack_systemTime = 0;
-        this.ack.ack_dataType = 0;
-        this.ack.ack_crc16 = 0;
-    }
-
-    updateAck() {
-        //this.log("BASE - updateAck()");
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 11) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.ack._updated = true;
-            this.ack.ack_systemTime = view.getBigUint64(0, true);
-            this.ack.ack_dataType = view.getUint8(8);
-            this.ack.ack_crc16 = view.getUint16(9, true);
-
-            return true;
-        }
-
-        return false;
-    }
-
-
     clearState() {
         this.state._updated = false;
-        this.state.state_modeSystem = 0;
-        this.state.state_modeFlight = 0;
-        this.state.state_modeControlFlight = 0;
         this.state.state_modeMovement = 0;
-        this.state.state_headless = 0;
-        this.state.state_controlSpeed = 0;
-        this.state.state_sensorOrientation = 0;
         this.state.state_battery = 0;
     }
 
@@ -462,13 +287,7 @@ class BigwaveRoboticsBase extends BaseModule {
             const view = new DataView(array.buffer);
 
             this.state._updated = true;
-            this.state.state_modeSystem = view.getUint8(0);
-            this.state.state_modeFlight = view.getUint8(1);
-            this.state.state_modeControlFlight = view.getUint8(2);
             this.state.state_modeMovement = view.getUint8(3);
-            this.state.state_headless = view.getUint8(4);
-            this.state.state_controlSpeed = view.getUint8(5);
-            this.state.state_sensorOrientation = view.getUint8(6);
             this.state.state_battery = view.getUint8(7);
 
             return true;
@@ -477,33 +296,6 @@ class BigwaveRoboticsBase extends BaseModule {
         return false;
     }
 
-
-    clearAltitude() {
-        this.altitude._updated = false;
-        this.altitude.altitude_temperature = 0;
-        this.altitude.altitude_pressure = 0;
-        this.altitude.altitude_altitude = 0;
-        this.altitude.altitude_rangeHeight = 0;
-    }
-
-    updateAltitude() {
-        //this.log(`BASE - updateAltitude() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 16) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.altitude._updated = true;
-            this.altitude.altitude_temperature = view.getFloat32(0, true);
-            this.altitude.altitude_pressure = view.getFloat32(4, true);
-            this.altitude.altitude_altitude = view.getFloat32(8, true);
-            this.altitude.altitude_rangeHeight = view.getFloat32(12, true);
-
-            return true;
-        }
-
-        return false;
-    }
 
     // #endregion Data Update
 
@@ -515,6 +307,8 @@ class BigwaveRoboticsBase extends BaseModule {
     // #region check Ack for first connection
 
     checkInitialAck(data, config) {
+        return true;
+        /*
         this.receiveFromDevice(data);
 
         if (this.targetDeviceID == undefined) {
@@ -527,6 +321,7 @@ class BigwaveRoboticsBase extends BaseModule {
         }
 
         return false;
+        // */
     }
 
     // #endregion check Ack for first connection
@@ -573,60 +368,9 @@ class BigwaveRoboticsBase extends BaseModule {
             const command = this.read(handler, this.DataType.COMMAND_COMMAND);
             const option = this.read(handler, this.DataType.COMMAND_OPTION);
 
-            switch (command) {
-                case 0x01:  // CommandType::Stop
-                    {
-                        // 정지 명령 시 조종 입력 값 초기화
-                        this.controlRoll = 0;
-                        this.controlPitch = 0;
-                        this.controlYaw = 0;
-                        this.controlThrottle = 0;
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-
             const dataArray = this.reserveCommand(target, command, option);
             this.bufferTransfer.push(dataArray);
             this.log(`BASE - Transfer_To_Device - Command: ${command}, option: ${option}`, dataArray);
-        }
-
-
-        // Control
-        if (handler.e(this.DataType.CONTROL_QUAD8_ROLL) ||
-            handler.e(this.DataType.CONTROL_QUAD8_PITCH) ||
-            handler.e(this.DataType.CONTROL_QUAD8_YAW) ||
-            handler.e(this.DataType.CONTROL_QUAD8_THROTTLE)) {
-            this.controlRoll = this.read(handler, this.DataType.CONTROL_QUAD8_ROLL, this.controlRoll);
-            this.controlPitch = this.read(handler, this.DataType.CONTROL_QUAD8_PITCH, this.controlPitch);
-            this.controlYaw = this.read(handler, this.DataType.CONTROL_QUAD8_YAW, this.controlYaw);
-            this.controlThrottle = this.read(handler, this.DataType.CONTROL_QUAD8_THROTTLE, this.controlThrottle);
-
-            const dataArray = this.reserveControlQuad8(target, this.controlRoll, this.controlPitch, this.controlYaw, this.controlThrottle);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - ControlQuad8', dataArray);
-        }
-
-
-        // Control
-        if (handler.e(this.DataType.CONTROL_POSITION_X) ||
-            handler.e(this.DataType.CONTROL_POSITION_Y) ||
-            handler.e(this.DataType.CONTROL_POSITION_Z) ||
-            handler.e(this.DataType.CONTROL_POSITION_VELOCITY) ||
-            handler.e(this.DataType.CONTROL_POSITION_HEADING) ||
-            handler.e(this.DataType.CONTROL_POSITION_ROTATIONAL_VELOCITY)) {
-            const x = this.read(handler, this.DataType.CONTROL_POSITION_X);
-            const y = this.read(handler, this.DataType.CONTROL_POSITION_Y);
-            const z = this.read(handler, this.DataType.CONTROL_POSITION_Z);
-            const velocity = this.read(handler, this.DataType.CONTROL_POSITION_VELOCITY);
-            const heading = this.read(handler, this.DataType.CONTROL_POSITION_HEADING);
-            const rotationalVelocity = this.read(handler, this.DataType.CONTROL_POSITION_ROTATIONAL_VELOCITY);
-
-            const dataArray = this.reserveControlPosition(target, x, y, z, velocity, heading, rotationalVelocity);
-            this.bufferTransfer.push(dataArray);
-            this.log('BASE - Transfer_To_Device - ControlPosition', dataArray);
         }
     }
 
@@ -641,28 +385,7 @@ class BigwaveRoboticsBase extends BaseModule {
 
     // Entry에 데이터 전송
     transferToEntry(handler) {
-        // Joystick
-        {
-            if (this.joystick._updated) {
-                for (const key in this.joystick) {
-                    handler.write(key, this.joystick[key]);
-                }
-
-                this.joystick._updated = false;
-            }
-        }
-
-        // Button
-        {
-            if (this.button._updated) {
-                for (const key in this.button) {
-                    handler.write(key, this.button[key]);
-                }
-
-                this.button._updated = false;
-            }
-        }
-
+        /*
         // State
         {
             if (this.state._updated) {
@@ -673,95 +396,7 @@ class BigwaveRoboticsBase extends BaseModule {
                 this.state._updated = false;
             }
         }
-
-        // Altitude
-        {
-            if (this.altitude._updated) {
-                for (const key in this.altitude) {
-                    handler.write(key, this.altitude[key]);
-                }
-
-                this.altitude._updated = false;
-            }
-        }
-
-        // Position
-        {
-            if (this.position._updated) {
-                for (const key in this.position) {
-                    handler.write(key, this.position[key]);
-                }
-
-                this.position._updated = false;
-            }
-        }
-
-        // Motion
-        {
-            if (this.motion._updated) {
-                for (const key in this.motion) {
-                    handler.write(key, this.motion[key]);
-                }
-
-                this.motion._updated = false;
-            }
-        }
-
-        // Trim
-        {
-            if (this.trim._updated) {
-                for (const key in this.trim) {
-                    handler.write(key, this.trim[key]);
-                }
-
-                this.trim._updated = false;
-            }
-        }
-
-        // Range
-        {
-            if (this.range._updated) {
-                for (const key in this.range) {
-                    handler.write(key, this.range[key]);
-                }
-
-                this.range._updated = false;
-            }
-        }
-
-        // BattleIrMessage
-        {
-            if (this.battleIrMessage._updated) {
-                for (const key in this.battleIrMessage) {
-                    handler.write(key, this.battleIrMessage[key]);
-                }
-
-                this.battleIrMessage._updated = false;
-            }
-        }
-
-        // CardColor
-        {
-            if (this.cardColor._updated) {
-                for (const key in this.cardColor) {
-                    handler.write(key, this.cardColor[key]);
-                }
-
-                this.cardColor._updated = false;
-            }
-        }
-
-        // InformationAssembledForEntry
-        {
-            if (this.informationAssembledForEntry._updated) {
-                for (const key in this.informationAssembledForEntry) {
-                    handler.write(key, this.informationAssembledForEntry[key]);
-                }
-
-                this.informationAssembledForEntry._updated = false;
-            }
-        }
-
+        // */
         // Entry-hw information
         {
             if (this.bufferTransfer == undefined) {
@@ -1037,61 +672,8 @@ class BigwaveRoboticsBase extends BaseModule {
             this.bufferTransfer = [];
         }
 
-        this.countReqeustDevice++;
-
-        if (this.bufferTransfer.length == 0) {
-            // 예약된 요청이 없는 경우 데이터 요청 등록(현재는 자세 데이터 요청)
-            if (this.arrayRequestData == null) {
-                return this.reservePing(this.targetDevice);
-            }
-            else {
-                const index = (this.countReqeustDevice % ((this.arrayRequestData.length + 1) * 2));   // +1은 조종기에 ping, *2 는 자주 갱신되는 데이터 요청
-                const indexArray = (index / 2).toFixed(0);
-
-                if ((index & 0x01) == 0) {
-                    if (indexArray < this.arrayRequestData.length) {
-                        return this.reserveRequest(this.targetDevice, this.arrayRequestData[indexArray]);    // 드론
-                    }
-                    else {
-                        return this.reservePing(0x20);  // 조종기
-                    }
-                }
-                else {
-                    return this.reserveRequest(this.targetDevice, 0xA1);     // 드론, 자주 갱신되는 데이터 모음(엔트리)
-                }
-            }
-        }
-        else {
-            // 예약된 요청이 있는 경우
-            if (this.arrayRequestData == null) {
-                switch (this.countReqeustDevice % 10) {
-                    case 0: return this.reservePing(this.targetDevice);
-                    default: break;
-                }
-            }
-            else {
-                const index = (this.countReqeustDevice % ((this.arrayRequestData.length + 1) * 4));   // +1은 자주 갱신되는 데이터 요청, *4는 예약된 요청 데이터
-                const indexArray = (index / 4).toFixed(0);
-
-                if ((index & 0x03) == 0) {
-                    if (indexArray < this.arrayRequestData.length) {
-                        return this.reserveRequest(this.targetDevice, this.arrayRequestData[indexArray]);    // 드론
-                    }
-                    else {
-                        return this.reserveRequest(this.targetDevice, 0xA1);     // 드론, 자주 갱신되는 데이터 모음(엔트리)
-                    }
-                }
-            }
-        }
-
         // 예약된 데이터 전송 처리
         const arrayTransfer = this.bufferTransfer[0];           // 전송할 데이터 배열(첫 번째 데이터 블럭 전송)
-        if (arrayTransfer[2] == 0x04) {
-            this.dataTypeLastTransfered = arrayTransfer[6];     // 요청한 데이터의 타입(Request인 경우)
-        }
-        else {
-            this.dataTypeLastTransfered = arrayTransfer[2];     // 전송한 데이터의 타입(이외의 모든 경우)
-        }
         this.countTransferRepeat++;
         this.timeTransfer = (new Date()).getTime();
 
@@ -1141,6 +723,8 @@ class BigwaveRoboticsBase extends BaseModule {
         return this.createTransferBlock(0x04, target, dataArray);
     }
 
+// */
+
 
     // Command
     reserveCommand(target, command, option) {
@@ -1183,6 +767,7 @@ class BigwaveRoboticsBase extends BaseModule {
         }
 
         // CRC16
+        /*
         {
             const indexStart = 2;
             const totalLength = 4 + dataArray.length; //
@@ -1193,11 +778,11 @@ class BigwaveRoboticsBase extends BaseModule {
             }
             view.setUint16((2 + 4 + dataArray.length), crc16, true);
         }
+        // */
 
         //this.log("BASE - createTransferBlock() - ", Array.from(new Uint8Array(dataBlock)))
         return Array.from(new Uint8Array(dataBlock));
     }
-// */
 
     fit(min, value, max) {
         return Math.max(Math.min(value, max), min);

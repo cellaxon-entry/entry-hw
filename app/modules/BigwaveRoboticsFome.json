@@ -1,5 +1,5 @@
 {
-    "id": "0F0C01",
+    "id": "500101",
     "name": {
         "en": "Bigwave Robotics Fome",
         "ko": "빅웨이브 로보틱스 포미 "
@@ -10,13 +10,14 @@
     "module": "BigwaveRoboticsFome.js",
     "url": "https://www.myrobotsolution.com/",
     "email": "help@bigwaverobotics.com/",
-    "reconnect": true,
     "selectPort": true,
+    "reconnect": true,
     "hardware": {
-        "type": "bluetooth",
+        "type": "serial",
         "control": "slave",
         "vendor": "Microsoft",
         "duration": 32,
-        "baudRate": 115200
+        "baudRate": 115200,
+        "lostTimer": 10000000
     }
 }
