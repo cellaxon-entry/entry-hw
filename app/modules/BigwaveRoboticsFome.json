@@ -15,7 +15,7 @@
     "hardware": {
         "type": "serial",
         "control": "slave",
-        "vendor": "Microsoft",
+        "vendor": [],
         "duration": 32,
         "baudRate": 115200,
         "lostTimer": 10000000

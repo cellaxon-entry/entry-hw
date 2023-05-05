@@ -8,17 +8,16 @@
 const BigwaveRoboticsBase = require('./BigwaveRoboticsBase');
 
 
-class BigwaveRoboticsFome extends BigwaveRoboticsBase
-{
-    constructor()
-    {
+class BigwaveRoboticsFome extends BigwaveRoboticsBase {
+    constructor() {
         super();
 
         this.log('Bigwave Robotics Fome - constructor()');
 
-        this.targetDeviceID   = '500101';
+        this.targetDeviceID = '500101';
         this.arrayRequestData = null;
     }
 }
 
 module.exports = new BigwaveRoboticsFome();
+
