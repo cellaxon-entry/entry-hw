@@ -1,16 +1,11 @@
-/* eslint-disable brace-style */
-/* eslint-disable max-len */
-/*jshint esversion: 6 */
 const BaseModule = require('./baseModule');
 const crc = require('crc');
-
-
 
 /***************************************************************************************
 
     BigwaveRoboticsBase
 
-    Last Update : 2023. 5. 4
+    Last Update : 2023. 5. 17
 
  ***************************************************************************************/
 
@@ -29,19 +24,11 @@ class BigwaveRoboticsBase extends BaseModule {
         this.serialport = undefined;
         this.isConnect = false;
 
-
         /***************************************************************************************
             로봇에 전달하는 데이터
          ***************************************************************************************/
-
-        /*
-            대상 장치로부터 수신 받는 데이터는 모두 _updated 변수를 최상단에 붙임.
-            업데이트 된 경우 _updated를 1로 만들고 entry로 전송이 끝나면 다시 0으로 변경
-        */
-
         // -- Entry -> Device ----------------------------------------------------------------------
-        this.DataType =
-        {
+        this.DataType = {
             // 전송 버퍼
             BUFFER_CLEAR: 'bufferClear',
 
@@ -49,30 +36,13 @@ class BigwaveRoboticsBase extends BaseModule {
             JSON_BODY: 'jsonBody',
         };
 
-
-
-
-        // -- Device -> Entry ----------------------------------------------------------------------
-        /*
-        // State
-        this.state =
-        {
-            _updated: 1,
-            state_modeMovement: 0,  // u8
-            state_battery: 0,       // u8
-        };
-        // */
-
-
-
         // 변수 초기화
         this.clearVariable();
 
-        this.targetDeviceID = undefined;    // 연결 대상 장치의 ID
+        this.targetDeviceID = undefined; // 연결 대상 장치의 ID
     }
 
     // #endregion Constructor
-
 
 
     /***************************************************************************************
@@ -91,7 +61,6 @@ class BigwaveRoboticsBase extends BaseModule {
         super.init(handler, config);
 
         this.log('BASE - init()');
-        //this.resetData();
     }
 
 
@@ -107,10 +76,6 @@ class BigwaveRoboticsBase extends BaseModule {
         this.serialport = serialport;
 
         return true;
-        /*
-        //this.log(`BASE - requestInitialData(0x${this.targetDevice.toString(16).toUpperCase()})`);
-        return this.reservePing(this.targetDevice);
-        // */
     }
 
 
@@ -120,10 +85,6 @@ class BigwaveRoboticsBase extends BaseModule {
      */
     checkInitialData(data, config) {
         return true;
-        /*
-        this.log('BASE - checkInitialData()');
-        return this.checkInitialAck(data, config);
-        // */
     }
 
 
@@ -131,7 +92,6 @@ class BigwaveRoboticsBase extends BaseModule {
         주기적으로 하드웨어에서 받은 데이터의 검증이 필요한 경우 사용합니다.
     */
     validateLocalData(data) {
-        //this.log("BASE - validateLocalData()");
         return true;
     }
 
@@ -142,8 +102,7 @@ class BigwaveRoboticsBase extends BaseModule {
         slave 모드인 경우 duration 속성 간격으로 지속적으로 기기에 요청을 보냅니다.
     */
     requestLocalData() {
-        //this.log('BASE - requestLocalData()');
-        return this.transferToDevice();
+        // 엔트리에서 데이터를 받으면 바로 시리얼 포트에 쓰고 있기 때문에 이 함수는 사용하지 않음
     }
 
 
@@ -151,7 +110,6 @@ class BigwaveRoboticsBase extends BaseModule {
         하드웨어에서 온 데이터 처리
     */
     handleLocalData(data) {
-        //this.log("BASE - handleLocalData()");
         this.receiveFromDevice(data);
     }
 
@@ -160,7 +118,6 @@ class BigwaveRoboticsBase extends BaseModule {
         엔트리로 전달할 데이터
     */
     requestRemoteData(handler) {
-        //this.log("BASE - requestRemoteData()");
         this.transferToEntry(handler);
     }
 
@@ -169,7 +126,6 @@ class BigwaveRoboticsBase extends BaseModule {
         엔트리에서 받은 데이터에 대한 처리
     */
     handleRemoteData(handler) {
-        //this.log("BASE - handleRemoteData()");
         this.receiveFromEntry(handler);
     }
 
@@ -194,57 +150,34 @@ class BigwaveRoboticsBase extends BaseModule {
     */
     reset() {
         this.log('BASE - reset()');
-        this.resetData();
+        this.clearVariable();
     }
 
     // #endregion Base Functions for Entry
 
 
-
-    /***************************************************************************************
-     *  데이터 리셋
-     ***************************************************************************************/
-    // #region Data Reset
-
-    resetData() {
-        // Device -> Entry
-
-        /*
-        // 변수 초기화
-        this.clearVariable();
-        // */
-    }
-
     clearVariable() {
         // -- Hardware ----------------------------------------------------------------
-        this.bufferReceive = [];            // 데이터 수신 버퍼
-        this.bufferTransfer = [];           // 데이터 송신 버퍼
+        this.bufferReceive = []; // 데이터 수신 버퍼
+        this.bufferTransfer = []; // 데이터 송신 버퍼
 
-        this.dataType = 0;                  // 수신 받은 데이터의 타입
-        this.dataLength = 0;                // 수신 받은 데이터의 길이
-        this.from = 0;                      // 송신 장치 타입
-        this.to = 0;                        // 수신 장치 타입
-        this.indexSession = 0;              // 수신 받은 데이터의 세션
-        this.indexReceiver = 0;             // 수신 받은 데이터의 세션 내 위치
-        this.dataBlock = [];                // 수신 받은 데이터 블럭
-        this.crc16Calculated = 0;           // CRC16 계산 결과
-        this.crc16Received = 0;             // CRC16 수신값
+        this.dataType = 0; // 수신 받은 데이터의 타입
+        this.dataLength = 0; // 수신 받은 데이터의 길이
 
-        this.maxTransferRepeat = 1;         // 최대 반복 전송 횟수
-        this.countTransferRepeat = 0;       // 반복 전송 횟수
-        this.dataTypeLastTransferred = 0;   // 마지막으로 전송한 데이터의 타입
+        this.indexSession = 0; // 수신 받은 데이터의 세션
+        this.indexReceiver = 0; // 수신 받은 데이터의 세션 내 위치
 
-        this.timeReceive = 0;               // 데이터를 전송 받은 시각
-        this.timeTransfer = 0;              // 예약 데이터를 전송한 시각
-        this.timeTransferNext = 0;          // 전송 가능한 다음 시간
-        this.timeTransferInterval = 20;     // 최소 전송 시간 간격
+        this.headerBlock = []; // 수신 받은 데이터 블럭
+        this.dataBlock = []; // 수신 받은 데이터 블럭
+        this.crc16Block = []; // 수신 받은 CRC16 블럭
 
-        this.countRequestDevice = 0;        // 장치에 데이터를 요청한 횟수 카운트
+        this.crc16Received = 0; // CRC16 수신 결과
+        this.crc16Calculated = 0; // CRC16 계산 결과
+
+        this.jsonBodyReceived = undefined; // 수신 받은 JSON Body
+
+        this.timeReceive = 0; // 데이터를 전송 받은 시각
     }
-
-    // #endregion Data Reset
-
-
 
     /***************************************************************************************
      *  데이터 업데이트
@@ -256,6 +189,7 @@ class BigwaveRoboticsBase extends BaseModule {
         this.state.state_modeMovement = 0;
         this.state.state_battery = 0;
     }
+
 
     updateState() {
         //this.log(`BASE - updateState() - length : ${this.dataBlock.length}`);
@@ -277,42 +211,17 @@ class BigwaveRoboticsBase extends BaseModule {
 
     // #endregion Data Update
 
-
-
     /***************************************************************************************
-     *  Communciation - 초기 연결 시 장치 확인
-     ***************************************************************************************/
-    // #region check Ack for first connection
-
-    checkInitialAck(data, config) {
-        return true;
-    }
-
-    // #endregion check Ack for first connection
-
-
-
-    /***************************************************************************************
-     *  Communciation - Entry로부터 받은 데이터를 장치에 전송
+     *  Communication - Entry로부터 받은 데이터를 장치에 전송
      ***************************************************************************************/
     // #region Data Transfer to Device from Entry
 
-    read(handler, dataType, defaultValue = 0) {
+    read(handler, dataType, defaultValue = undefined) {
         return handler.e(dataType) ? handler.read(dataType) : defaultValue;
     }
 
     /*
-        Entry에서 받은 데이터 블럭 처리
-        Entry에서 수신 받은 데이터는 bufferTransfer에 바로 등록
-
-        * entryjs에서 변수값을 entry-hw로 전송할 때 절차
-
-            1. Entry.hw.setDigitalPortValue("", value) 명령을 사용하여 지정한 변수의 값을 등록
-            2. Entry.hw.update() 를 사용하여 등록된 값 전체 전달
-            3. delete Entry.hw.sendQueue[""] 를 사용하여 전달한 값을 삭제
-
-            위와 같은 절차로 데이터를 전송해야 1회만 전송 됨.
-            Entry.hw.update를 호출하면 등록된 값 전체를 한 번에 즉시 전송하는 것으로 보임
+        Entry에서 받은 데이터 블럭을 바로 시리얼 포트로 전송
     */
     receiveFromEntry(handler) {
         // Json Body
@@ -320,7 +229,7 @@ class BigwaveRoboticsBase extends BaseModule {
             const jsonBody = this.read(handler, this.DataType.JSON_BODY);
             const dataArray = this.createTransferBlock(jsonBody);
 
-            this.serialport.write(dataArray);		
+            this.serialport.write(dataArray);
 
             this.log(`BASE - jsonBody: ${jsonBody}`);
             this.log(`     - dataArray: ${dataArray}`);
@@ -329,91 +238,158 @@ class BigwaveRoboticsBase extends BaseModule {
 
     // #endregion Data Transfer to Device from Entry
 
-
-
     /***************************************************************************************
-     *  Communciation - 장치로부터 받은 데이터를 Entry에 전송
+     *  Communication - 장치로부터 받은 데이터를 Entry에 전송
      ***************************************************************************************/
     // #region Data Transfer to Entry from Device
 
     // Entry에 데이터 전송
     transferToEntry(handler) {
+        if (this.jsonBodyReceived != undefined &&
+            this.jsonBodyReceived.dataType != undefined &&
+            this.jsonBodyReceived.dataType == 'SENSOR' &&
+            this.jsonBodyReceived.param != undefined &&
+            this.jsonBodyReceived.param.length > 0) {
+            this.jsonBodyReceived.param.foreach((sensor) => {
+                handler.write(sensor.id, sensor.value);
+            });
+        }
+
+        this.jsonBodyReceived = undefined;
     }
 
     // #endregion Data Transfer to Entry from Device
 
-
-
     /***************************************************************************************
-     *  Communciation - 장치로부터 받은 데이터를 검증
+     *  Communication - 장치로부터 받은 데이터를 검증
      ***************************************************************************************/
     // #region Data Receiver from Device
 
     // 장치로부터 받은 데이터 배열 처리
     receiveFromDevice(dataArray) {
+        //this.log(`BASE - receiverForDevice() - Length : ${dataArray.length}`, dataArray);
+
+        if (dataArray == undefined || dataArray.length == 0) {
+            return;
+        }
+
+        const i = 0;
+
+        // 버퍼로부터 데이터를 읽어 하나의 완성된 데이터 블럭으로 변환
+        for (let i = 0; i < dataArray.length; i++) {
+            const data = dataArray[i];
+
+            let flagContinue = true;
+            let flagSessionNext = false;
+            let flagComplete = false;
+
+            switch (this.indexSession) {
+                case 0: // Start Code
+                    {
+                        switch (this.indexReceiver) {
+                            case 0:
+                                if (data != 0x0A) {
+                                    continue;
+                                }
+                                break;
+
+                            case 1:
+                                if (data != 0x55) {
+                                    flagContinue = false;
+                                } else {
+                                    flagSessionNext = true;
+                                    this.headerBlock = [];
+                                }
+                                break;
+                        }
+                    }
+                    break;
+
+                case 1: // Header
+                    {
+                        this.headerBlock.push(data);
+
+                        if (this.indexReceiver == 3) {
+                            const view = new DataView(this.headerBlock);
+                            this.dataLength = view.getUint32(0, true);
+                            this.dataBlock = []; // 수신 받은 데이터 블럭
+                            flagSessionNext = true;
+                        }
+                    }
+                    break;
+
+                case 2: // Data
+                    {
+                        this.dataBlock.push(data);
+
+                        if (this.indexReceiver == this.dataLength - 1) {
+                            this.crc16Block = []; // 수신 받은 데이터 블럭
+                            flagSessionNext = true;
+                        }
+                    }
+                    break;
+
+                case 3: // CRC16
+                    {
+                        this.crc16Block.push(data);
+
+                        if (this.indexReceiver == 1) {
+                            flagComplete = true;
+                        }
+                    }
+                    break;
+
+                default:
+                    {
+                        flagContinue = false;
+                    }
+                    break;
+            }
+
+            // 데이터 전송 완료 처리
+            if (flagComplete) {
+                const view = new DataView(this.crc16Block);
+                this.crc16Received = view.getUint16(0, true);
+
+                const startCode = new Uint8Array([0x0a, 0x55]); // 2바이트 시작 코드
+                this.crc16Calculated = crc.crc16ccitt(Buffer.concat([startCode, this.headerBlock, this.dataBlock]));
+
+                this.log(`BASE - Receiver - CRC16 - Calculated : ${this.crc16Calculated.toString(16).toUpperCase()}, Received : ${this.crc16Received.toString(16).toUpperCase()}`);
+                if (this.crc16Calculated == this.crc16Received) {
+                    this.jsonBodyReceived = JSON.parse(this.dataBlock);
+                    this.timeReceive = (new Date()).getTime();
+                }
+
+                flagContinue = false;
+            }
+
+            // 데이터 처리 결과에 따라 인덱스 변수 처리
+            if (flagContinue) {
+                if (flagSessionNext) {
+                    this.indexSession++;
+                    this.indexReceiver = 0;
+                } else {
+                    this.indexReceiver++;
+                }
+            } else {
+                this.indexSession = 0; // 수신 받는 데이터의 세션
+                this.indexReceiver = 0; // 수신 받는 데이터의 세션 내 위치
+            }
+        }
     }
 
     // #endregion Data Receiver from Device
 
 
-
     /***************************************************************************************
-     *  Communciation - 장치로부터 받은 데이터 수신 처리
-     ***************************************************************************************/
-    // #region Data Handler for received data from Device
-
-    // 장치로부터 받은 데이터 블럭 처리
-    handlerForDevice() {
-    }
-
-    // #endregion Data Receiver for received data from Device
-
-
-
-    /***************************************************************************************
-     *  Communciation - 데이터를 장치로 전송(주기적으로 호출됨)
-     ***************************************************************************************/
-    // #region Data Transfer
-
-    // 장치에 데이터 전송
-    transferToDevice() {
-        if (this.bufferTransfer == undefined)
-        {
-            this.bufferTransfer = [];
-            return null;
-        }
-
-        if (this.bufferTransfer.length == 0) {
-            return null;
-        }
-
-        // 예약된 데이터 전송 처리
-        const arrayTransfer = this.bufferTransfer;           // 전송할 데이터 배열(첫 번째 데이터 블럭 전송)
-        this.countTransferRepeat++;
-        this.timeTransfer = (new Date()).getTime();
-
-        // maxTransferRepeat 이상 전송했음에도 응답이 없는 경우 데이터 전송 중단
-        if (this.countTransferRepeat >= this.maxTransferRepeat) {
-            this.bufferTransfer = [];
-            this.countTransferRepeat = 0;
-        }
-
-        return arrayTransfer;
-    }
-
-    // #endregion Data Transfer
-
-
-
-    /***************************************************************************************
-     *  Communciation - 장치 전송용 데이터 배열 생성
+     *  Communication - 장치 전송용 데이터 배열 생성
      ***************************************************************************************/
     // 전송 데이터 배열 생성
     // https://cryingnavi.github.io/javascript-typedarray/
     createTransferBlock(jsonBody) {
-        const startCode = new Uint8Array([0x0A, 0x55]); // 2바이트 시작 코드
+        const startCode = new Uint8Array([0x0a, 0x55]); // 2바이트 시작 코드
         const jsonBytes = new TextEncoder().encode(JSON.stringify(jsonBody)); // JSON을 바이트 형태로 변환
-        const packetLength = 2 + 4 + jsonBytes.length + 2;  // Start Code + Header(length 4 byte) + Data + CRC16
+        const packetLength = 2 + 4 + jsonBytes.length + 2; // Start Code + Header(length 4 byte) + Data + CRC16
         const packetLengthBytes = new Uint8Array(new Uint32Array([packetLength]).buffer); // 패킷 길이를 4바이트 빅엔디안으로 변환
         const crc16 = crc.crc16ccitt(Buffer.concat([startCode, packetLengthBytes, jsonBytes]));
         const crc16Bytes = new Uint8Array(new Uint16Array([crc16]).buffer); // CRC16을 2바이트 빅엔디안으로 변환
@@ -434,16 +410,12 @@ class BigwaveRoboticsBase extends BaseModule {
         return Math.max(Math.min(value, max), min);
     }
 
-
     // 값 추출
     getByte(value, index) {
-        return ((value >> (index << 3)) & 0xff);
+        return (value >> (index << 3)) & 0xff;
     }
 
     // #endregion Data Transfer Functions for Device
-
-
-
 
     /***************************************************************************************
      *  로그 출력
@@ -472,7 +444,6 @@ class BigwaveRoboticsBase extends BaseModule {
         // */
     }
 
-
     // 바이트 배열을 16진수 문자열로 변경
     convertByteArrayToHexString(data) {
         let strHexArray = '';
@@ -488,8 +459,7 @@ class BigwaveRoboticsBase extends BaseModule {
                 strHexArray += strHex;
             }
             strHexArray = strHexArray.substr(1, strHexArray.length - 1);
-        }
-        else {
+        } else {
             strHexArray = data.toString();
         }
 
@@ -499,6 +469,4 @@ class BigwaveRoboticsBase extends BaseModule {
     // #endregion Functions for log
 }
 
-
 module.exports = BigwaveRoboticsBase;
-
