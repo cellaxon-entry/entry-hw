@@ -268,14 +268,12 @@ class BigwaveRoboticsBase extends BaseModule {
     // 장치로부터 받은 데이터 배열 처리
     receiveFromDevice(dataArray) {
         //this.log(`BASE - receiverForDevice() - Length : ${dataArray.length}`, dataArray);
-
         if (dataArray == undefined || dataArray.length == 0) {
             return;
         }
 
-        const i = 0;
-
         // 버퍼로부터 데이터를 읽어 하나의 완성된 데이터 블럭으로 변환
+        //this.log(`dataArray.length: ${dataArray.length}`);
         for (let i = 0; i < dataArray.length; i++) {
             const data = dataArray[i];
 
@@ -283,6 +281,7 @@ class BigwaveRoboticsBase extends BaseModule {
             let flagSessionNext = false;
             let flagComplete = false;
 
+            //this.log(`i: ${i}, data: ${data.toString(16).toUpperCase()} / ${data}, this.indexSession: ${this.indexSession}, this.indexReceiver: ${this.indexReceiver}`);
             switch (this.indexSession) {
                 case 0: // Start Code
                     {
@@ -310,8 +309,9 @@ class BigwaveRoboticsBase extends BaseModule {
                         this.headerBlock.push(data);
 
                         if (this.indexReceiver == 3) {
-                            const view = new DataView(this.headerBlock);
-                            this.dataLength = view.getUint32(0, true);
+                            const header = new Uint8Array(this.headerBlock);
+                            const view = new DataView(header.buffer);
+                            this.dataLength = view.getUint32(0, true) - 2 - 4 - 2;
                             this.dataBlock = []; // 수신 받은 데이터 블럭
                             flagSessionNext = true;
                         }
@@ -348,15 +348,18 @@ class BigwaveRoboticsBase extends BaseModule {
 
             // 데이터 전송 완료 처리
             if (flagComplete) {
-                const view = new DataView(this.crc16Block);
+                const crc16 = new Uint8Array(this.crc16Block);
+                const view = new DataView(crc16.buffer);
                 this.crc16Received = view.getUint16(0, true);
 
-                const startCode = new Uint8Array([0x0a, 0x55]); // 2바이트 시작 코드
-                this.crc16Calculated = crc.crc16ccitt(Buffer.concat([startCode, this.headerBlock, this.dataBlock]));
+                const startCodeArray = new Uint8Array([0x0a, 0x55]); // 2바이트 시작 코드
+                const headerArray = new Uint8Array(this.headerBlock);
+                const bodyArray = new Uint8Array(this.dataBlock);
+                this.crc16Calculated = crc.crc16ccitt(Buffer.concat([startCodeArray, headerArray, bodyArray]));
 
-                this.log(`BASE - Receiver - CRC16 - Calculated : ${this.crc16Calculated.toString(16).toUpperCase()}, Received : ${this.crc16Received.toString(16).toUpperCase()}`);
+                //this.log(`BASE - Receiver - CRC16 - Calculated : ${this.crc16Calculated.toString(16).toUpperCase()}, Received : ${this.crc16Received.toString(16).toUpperCase()}`);
                 if (this.crc16Calculated == this.crc16Received) {
-                    this.jsonBodyReceived = JSON.parse(this.dataBlock);
+                    this.jsonBodyReceived = JSON.parse(new TextDecoder().decode(bodyArray.buffer));
                     this.timeReceive = (new Date()).getTime();
                 }
 
