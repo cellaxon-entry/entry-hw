@@ -167,6 +167,7 @@ class BigwaveRoboticsBase extends BaseModule {
         this.indexSession = 0; // 수신 받은 데이터의 세션
         this.indexReceiver = 0; // 수신 받은 데이터의 세션 내 위치
 
+        this.startBlock = []; // 수신 받은 데이터 블럭
         this.headerBlock = []; // 수신 받은 데이터 블럭
         this.dataBlock = []; // 수신 받은 데이터 블럭
         this.crc16Block = []; // 수신 받은 CRC16 블럭
@@ -250,7 +251,8 @@ class BigwaveRoboticsBase extends BaseModule {
             this.jsonBodyReceived.dataType == 'SENSOR' &&
             this.jsonBodyReceived.param != undefined &&
             this.jsonBodyReceived.param.length > 0) {
-            this.jsonBodyReceived.param.foreach((sensor) => {
+            this.jsonBodyReceived.param.forEach((sensor) => {
+                this.log(`id: ${sensor.id}, value: ${sensor.value}`);
                 handler.write(sensor.id, sensor.value);
             });
         }
@@ -273,7 +275,7 @@ class BigwaveRoboticsBase extends BaseModule {
         }
 
         // 버퍼로부터 데이터를 읽어 하나의 완성된 데이터 블럭으로 변환
-        //this.log(`dataArray.length: ${dataArray.length}`);
+        this.log(`dataArray.length: ${dataArray.length}`);
         for (let i = 0; i < dataArray.length; i++) {
             const data = dataArray[i];
 
@@ -281,25 +283,21 @@ class BigwaveRoboticsBase extends BaseModule {
             let flagSessionNext = false;
             let flagComplete = false;
 
-            //this.log(`i: ${i}, data: ${data.toString(16).toUpperCase()} / ${data}, this.indexSession: ${this.indexSession}, this.indexReceiver: ${this.indexReceiver}`);
+            this.log(`i: ${i}, data: ${data.toString(16).toUpperCase()} / ${data}, indexSession: ${this.indexSession}, indexReceiver: ${this.indexReceiver}`);
             switch (this.indexSession) {
                 case 0: // Start Code
                     {
-                        switch (this.indexReceiver) {
-                            case 0:
-                                if (data != 0x0A) {
-                                    continue;
-                                }
-                                break;
+                        this.startBlock.push(data);
 
-                            case 1:
-                                if (data != 0x55) {
-                                    flagContinue = false;
-                                } else {
-                                    flagSessionNext = true;
-                                    this.headerBlock = [];
-                                }
-                                break;
+                        if (this.startBlock.length > 2) {
+                            this.startBlock.shift();
+                        }
+
+                        if (this.startBlock.length == 2 &&
+                            this.startBlock[0] == 0x0A &&
+                            this.startBlock[1] == 0x55) {
+                            flagSessionNext = true;
+                            this.headerBlock = [];
                         }
                     }
                     break;
@@ -314,6 +312,8 @@ class BigwaveRoboticsBase extends BaseModule {
                             this.dataLength = view.getUint32(0, true) - 2 - 4 - 2;
                             this.dataBlock = []; // 수신 받은 데이터 블럭
                             flagSessionNext = true;
+
+                            this.log(`dataLength: ${this.dataLength}`);
                         }
                     }
                     break;
@@ -346,6 +346,7 @@ class BigwaveRoboticsBase extends BaseModule {
                     break;
             }
 
+
             // 데이터 전송 완료 처리
             if (flagComplete) {
                 const crc16 = new Uint8Array(this.crc16Block);
@@ -357,10 +358,13 @@ class BigwaveRoboticsBase extends BaseModule {
                 const bodyArray = new Uint8Array(this.dataBlock);
                 this.crc16Calculated = crc.crc16ccitt(Buffer.concat([startCodeArray, headerArray, bodyArray]));
 
-                //this.log(`BASE - Receiver - CRC16 - Calculated : ${this.crc16Calculated.toString(16).toUpperCase()}, Received : ${this.crc16Received.toString(16).toUpperCase()}`);
+                this.log(`BASE - Receiver - CRC16 - Calculated : ${this.crc16Calculated.toString(16).toUpperCase()}, Received : ${this.crc16Received.toString(16).toUpperCase()}`);
                 if (this.crc16Calculated == this.crc16Received) {
                     this.jsonBodyReceived = JSON.parse(new TextDecoder().decode(bodyArray.buffer));
                     this.timeReceive = (new Date()).getTime();
+
+                    const strJson2 = JSON.stringify(this.jsonBodyReceived);
+                    this.log(strJson2);
                 }
 
                 flagContinue = false;
@@ -404,7 +408,7 @@ class BigwaveRoboticsBase extends BaseModule {
         packet.set(crc16Bytes, packetLength - 2);
 
         // 결과 출력
-        console.log(packet);
+        this.log(this.convertByteArrayToHexString(packet));
 
         return packet;
     }
