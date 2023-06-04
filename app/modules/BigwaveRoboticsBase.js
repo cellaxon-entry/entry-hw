@@ -24,6 +24,8 @@ class BigwaveRoboticsBase extends BaseModule {
         this.serialport = undefined;
         this.isConnect = false;
 
+        this.TIME_OUT = 100;    // ms - 설정한 시간 내에 하나의 데이터를 다 받지 못하면 데이터 수신 처리 변수 초기화
+
         /***************************************************************************************
             로봇에 전달하는 데이터
          ***************************************************************************************/
@@ -177,48 +179,25 @@ class BigwaveRoboticsBase extends BaseModule {
 
         this.jsonBodyReceived = undefined; // 수신 받은 JSON Body
 
-        this.timeReceive = 0; // 데이터를 전송 받은 시각
+        this.timeReceivedJson = 0; // 완전한 JSON 데이터를 전송 받은 시각
+        this.timeReceivedByte = 0; // 바이트 데이터를 전송 받은 시각
     }
 
-    /***************************************************************************************
-     *  데이터 업데이트
-     ***************************************************************************************/
-    // #region Data Update
-
-    clearState() {
-        this.state._updated = false;
-        this.state.state_modeMovement = 0;
-        this.state.state_battery = 0;
-    }
-
-
-    updateState() {
-        //this.log(`BASE - updateState() - length : ${this.dataBlock.length}`);
-
-        if (this.dataBlock != undefined && this.dataBlock.length == 8) {
-            const array = Uint8Array.from(this.dataBlock);
-            const view = new DataView(array.buffer);
-
-            this.state._updated = true;
-            this.state.state_modeMovement = view.getUint8(3);
-            this.state.state_battery = view.getUint8(7);
-
-            return true;
-        }
-
-        return false;
-    }
-
-
-    // #endregion Data Update
 
     /***************************************************************************************
      *  Communication - Entry로부터 받은 데이터를 장치에 전송
      ***************************************************************************************/
     // #region Data Transfer to Device from Entry
 
-    read(handler, dataType, defaultValue = undefined) {
-        return handler.e(dataType) ? handler.read(dataType) : defaultValue;
+    /*
+        Entry에서 받은 데이터 블럭을 바로 시리얼 포트로 전송
+    */
+    read(handler, dataType) {
+        if (handler.e(dataType)) {
+            return handler.read(dataType);
+        }
+
+        return undefined;
     }
 
     /*
@@ -226,14 +205,17 @@ class BigwaveRoboticsBase extends BaseModule {
     */
     receiveFromEntry(handler) {
         // Json Body
-        if (handler.e(this.DataType.JSON_BODY)) {
+        {
             const jsonBody = this.read(handler, this.DataType.JSON_BODY);
-            const dataArray = this.createTransferBlock(jsonBody);
 
-            this.serialport.write(dataArray);
+            if (jsonBody != undefined) {
+                const dataArray = this.createTransferBlock(jsonBody);
 
-            this.log(`BASE - jsonBody: ${jsonBody}`);
-            this.log(`     - dataArray: ${dataArray}`);
+                this.serialport.write(dataArray);
+
+                this.log(`BASE - jsonBody: ${jsonBody}`);
+                this.log(`     - dataArray: ${dataArray}`);
+            }
         }
     }
 
@@ -274,6 +256,16 @@ class BigwaveRoboticsBase extends BaseModule {
             return;
         }
 
+        const timeNow = (new Date()).getTime(); // (ms)
+
+        // 수신되는 데이터 사이에 시간 간격이 길어지면 초기화
+        // (데이터를 정상적으로 받지 못한 경우 다시 처음부터 받을 수 있도록)
+        if (timeNow - this.timeReceivedByte > this.TIME_OUT) {
+            this.indexSession = 0; // 수신 받는 데이터의 세션
+            this.indexReceiver = 0; // 수신 받는 데이터의 세션 내 위치
+            this.log('Time out.');
+        }
+
         // 버퍼로부터 데이터를 읽어 하나의 완성된 데이터 블럭으로 변환
         this.log(`dataArray.length: ${dataArray.length}`);
         for (let i = 0; i < dataArray.length; i++) {
@@ -282,6 +274,7 @@ class BigwaveRoboticsBase extends BaseModule {
             let flagContinue = true;
             let flagSessionNext = false;
             let flagComplete = false;
+
 
             this.log(`i: ${i}, data: ${data.toString(16).toUpperCase()} / ${data}, indexSession: ${this.indexSession}, indexReceiver: ${this.indexReceiver}`);
             switch (this.indexSession) {
@@ -358,10 +351,11 @@ class BigwaveRoboticsBase extends BaseModule {
                 const bodyArray = new Uint8Array(this.dataBlock);
                 this.crc16Calculated = crc.crc16ccitt(Buffer.concat([startCodeArray, headerArray, bodyArray]));
 
+                // 수신 받은 CRC와 연산한 CRC 비교
                 this.log(`BASE - Receiver - CRC16 - Calculated : ${this.crc16Calculated.toString(16).toUpperCase()}, Received : ${this.crc16Received.toString(16).toUpperCase()}`);
                 if (this.crc16Calculated == this.crc16Received) {
                     this.jsonBodyReceived = JSON.parse(new TextDecoder().decode(bodyArray.buffer));
-                    this.timeReceive = (new Date()).getTime();
+                    this.timeReceivedJson = (new Date()).getTime();
 
                     const strJson2 = JSON.stringify(this.jsonBodyReceived);
                     this.log(strJson2);
@@ -382,6 +376,8 @@ class BigwaveRoboticsBase extends BaseModule {
                 this.indexSession = 0; // 수신 받는 데이터의 세션
                 this.indexReceiver = 0; // 수신 받는 데이터의 세션 내 위치
             }
+
+            this.timeReceivedByte = timeNow;
         }
     }
 
